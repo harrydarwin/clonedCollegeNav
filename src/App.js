@@ -1,6 +1,6 @@
 import { Component, Fragment } from 'react'
 
-class App extends Compoenent {
+class App extends Component {
   render() {
     return(
       <Fragment>
