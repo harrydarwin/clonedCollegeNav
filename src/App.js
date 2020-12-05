@@ -4,7 +4,7 @@ class App extends Compoenent {
   render() {
     return(
       <Fragment>
-        <h1>Kyle's pull</h1>
+        <h1>Erzhena's pull</h1>
       </Fragment>
     )
   }
