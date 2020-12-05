@@ -1,8 +1,11 @@
 import { Component } from 'react';
 import axios from 'axios'
 
+
+//Grab array of things and filter again for category name including university, college etc to get only schools/post secondary institutes
 class Search extends Component {
-    constructorDidMount(){
+    componentDidMount(){
+        console.log('ITS ATTACHED');
         axios({
             method: 'GET',
             responseType: 'json',
@@ -10,9 +13,14 @@ class Search extends Component {
             params: {
                 client_id:'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
                 client_secret:'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
+                near: 'Toronto, ON',
+                query: "General College & University",
+                v: 20201205
             }
         }).then((res) => {
-            console.log(res);
+            console.log(res.data.response.venues);
+        }).catch((err) => {
+            console.log(err, 'It aint working');
         })
     }
 
@@ -22,3 +30,5 @@ class Search extends Component {
         )
     }
 }
+
+export default Search;
