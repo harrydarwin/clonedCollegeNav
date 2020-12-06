@@ -14,7 +14,7 @@ class Search extends Component {
                 client_id:'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
                 client_secret:'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
                 near: 'Toronto, ON',
-                query: "General College & University",
+                q:'Harvard',
                 v: 20201205
             }
         }).then((res) => {
