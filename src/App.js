@@ -1,4 +1,5 @@
-import { Component, Fragment } from 'react'
+import { Component, Fragment } from 'react';
+import Search from './Search.js';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
         <h1>Kyle's pull</h1>
         <h2>Clarke's Pull ✨</h2>
         <h2>Harry's Pull</h2>
+        <Search />
       </Fragment>
     )
   }
