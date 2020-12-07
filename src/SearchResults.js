@@ -19,26 +19,11 @@ import axios from 'axios'
 
 
 
-class Search extends Component {
+
+class SearchResults extends Component {
     componentDidMount(){
         console.log('ITS ATTACHED');
-        axios({
-            method: 'GET',
-            responseType: 'json',
-            url: 'https://api.foursquare.com/v2/venues/search',
-            params: {
-                client_id:'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
-                client_secret:'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
-                near: 'Toronto, ON',
-                categoryId:'4bf58dd8d48988d1a2941735',
-                radius:'10000', //its in metres
-                v: 20201205
-            }
-        }).then((res) => {
-            console.log(res.data.response.venues);
-        }).catch((err) => {
-            console.log(err, 'It aint working');
-        })
+        
     }
 
     render(){
@@ -48,4 +33,4 @@ class Search extends Component {
     }
 }
 
-export default Search;
+export default SearchResults;
