@@ -30,8 +30,8 @@ class Search extends Component {
                 client_id:'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
                 client_secret:'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
                 near: 'Toronto, ON',
-                categoryId:'4bf58dd8d48988d1ae941735',
-                radius:'250', //its in metres
+                categoryId:'4bf58dd8d48988d1a2941735',
+                radius:'10000', //its in metres
                 v: 20201205
             }
         }).then((res) => {
