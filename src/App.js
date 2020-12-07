@@ -1,4 +1,6 @@
-import { Component, Fragment } from 'react';
+import { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './Header.js';
 import Search from './Search.js';
 
 
@@ -23,13 +25,18 @@ import Search from './Search.js';
 class App extends Component {
   render() {
     return(
-      <Fragment>
-        <h1>Erzhena's pull</h1>
-        <h1>Kyle's pull</h1>
-        <h2>Clarke's Pull ✨</h2>
-        <h2>Harry's Pull</h2>
+      <Router>
+        
+        <Header />
+
+        {/* <Route exact path="/" component={SearchResults} /> */}
+
+        {/* <Route exact path="/school/:schoolID" component={SchoolDetails} /> */}
+        
+
+
         <Search />
-      </Fragment>
+      </Router>
     )
   }
 }
