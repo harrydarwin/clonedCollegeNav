@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import axios from 'axios'
 
 
@@ -22,13 +22,27 @@ import axios from 'axios'
 
 class SearchResults extends Component {
     componentDidMount(){
-        console.log('ITS ATTACHED');
         
     }
-
+    
     render(){
         return(
-            <h1>Some stuff</h1>
+            <Fragment>
+                {
+                this.props.schoolResults.map((schoolObj) => {
+                    return(
+                    // console.log(schoolObj, schoolObj.name, schoolObj.location.formattedAddress)
+                <div key={schoolObj.id}>
+                    <p>{schoolObj.name}</p>
+                    <p>{schoolObj.location.formattedAddress}</p>
+                </div>
+                    
+                    )
+                })
+                }
+            </Fragment>
+            
+        
         )
     }
 }
