@@ -6,22 +6,24 @@ const Header = (props) => {
             <header>
                 <h1>College Navigator</h1>
                 <form action='submit' onSubmit={submitHandler}>
-                    <input onChange={handleCityInput} type="text" placeholder='Enter City' id='citySearch' required/>
+                    <input onChange={handleCityInput} type="text" placeholder='City' id='citySearch' required/>
                     <label className='srOnly' htmlFor="citySearch">Please enter a city to search</label>
 
-                    <input onChange={handleCountryInput} type="text" placeholder='Enter Country' id='countrySearch'/>
+                    <input onChange={handleCountryInput} type="text" placeholder='Province/State OR Country' id='countrySearch' required/>
                     <label className="srOnly" htmlFor="countrySearch">Please enter the country the city is in</label>
 
                     <legend>Search Radius</legend>
-                    <input onChange={radiusHandler} type="radio" id='shortRadius' name='radius' value='5000' />
+                    <input onChange={radiusHandler} type="radio" id='shortRadius' name='radius' value='5000' required/>
                     <label htmlFor="shortRadius">5KM</label>
                     <input onChange={radiusHandler} type="radio" id='mediumRadius' name='radius' value='10000' />
                     <label htmlFor="mediumRadius">10KM</label>
                     <input onChange={radiusHandler} type="radio" id='longRadius' name='radius' value='25000' />
                     <label htmlFor="longRadius">25KM</label>
+                    <input onChange={radiusHandler} type="radio" id='xLongRadius' name='radius' value='50000' />
+                    <label htmlFor="longRadius">50KM</label>
 
                     <legend>School Type</legend>
-                    <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' />
+                    <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' required/>
                     <label htmlFor="university">University</label>
                     <input onChange={schoolHandler} type="radio" id='college' name='schoolType' value='4bf58dd8d48988d1a2941735' />
                     <label htmlFor="college">College</label>

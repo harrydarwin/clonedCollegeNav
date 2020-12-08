@@ -16,7 +16,8 @@ class App extends Component {
       radius: '',
       schoolTypeId: '',
       cityInput: '',
-      countryInput: ''
+      countryInput: '',
+      formattedAddress: []
     }
   }
 
@@ -39,6 +40,15 @@ class App extends Component {
     const filteredArray = dataArray.filter((object => object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"));
     console.log(filteredArray);
 
+    // this.props.schoolResults[0].location.formattedAddress
+    
+
+    this.setState({
+      schoolResults: filteredArray,
+      // formattedAddress:
+    })
+    console.log(this.state.schoolResults[0].location.formattedAddress);
+
   }).catch ((err) => {
     console.log(err, 'It aint working');
   })
@@ -47,6 +57,10 @@ class App extends Component {
  handleSubmit = (e) => {
    e.preventDefault();
    this.getData();
+    //  const address = this.state.schoolResults[0].location.formattedAddress
+    //  console.log(address)
+    
+   
  }
 
  handleSchoolType = (e) => {
@@ -92,11 +106,19 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
 
-        {/* <Route exact path="/" component={SearchResults} /> */}
+        <Route exact path="/" render={() => {
+          return (
+              <SearchResults 
+              schoolResults = {this.state.schoolResults} />
+          )
+        }
+          }/>
+          
+          
 
         {/* <Route exact path="/school/:schoolID" component={SchoolDetails} /> */}
         
-      
+        
 
         
       </Router>
