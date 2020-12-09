@@ -40,10 +40,10 @@ class SearchResults extends Component {
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
-                    <div>
+                    <div className="schoolResults">
                         <details key={schoolObj.id}>
                             <summary>{schoolObj.name}</summary>
-                            <p>{schoolObj.location.formattedAddress}</p>
+                                <p>{schoolObj.location.formattedAddress.join(', ')}</p>
                         </details>
                         <button 
                         onClick={ () => {this.handleAddFav(schoolObj.name, schoolObj.location.formattedAddress)} }
