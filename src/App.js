@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
+import AddSchool from './AddSchool';
 
 
 
@@ -116,9 +117,13 @@ class App extends Component {
               schoolResults = {this.state.schoolResults} />
           )
         }
-          }/>
-          
-          
+
+        
+         }/>
+        <Route path="/addSchool" component={AddSchool} /> 
+      
+         
+         
 
         {/* <Route exact path="/school/:schoolID" component={SchoolDetails} /> */}
         
