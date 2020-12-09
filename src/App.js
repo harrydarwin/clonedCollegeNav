@@ -4,6 +4,8 @@ import axios from 'axios';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
 import AddSchool from './AddSchool';
+import Favourites from './Favourites.js';
+
 
 
 
@@ -110,7 +112,7 @@ class App extends Component {
         handleCountryInput={this.handleCountryInput}
         submitHandler={this.handleSubmit}
         />
-
+        <Favourites />
         <Route exact path="/" render={() => {
           return (
               <SearchResults 
