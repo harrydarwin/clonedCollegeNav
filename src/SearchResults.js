@@ -28,7 +28,8 @@ class SearchResults extends Component {
         const dbFavouritesRef = firebase.database().ref('Favourites')
         const favouriteSchool = {
             schoolName: name,
-            schoolAddress: [...address]
+            schoolAddress: [...address],
+            schoolNotes: ''
         }
         dbFavouritesRef.push(favouriteSchool);
     }
