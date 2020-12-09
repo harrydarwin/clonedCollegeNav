@@ -39,7 +39,9 @@ class App extends Component {
     const dataArray = res.data.response.venues;
     // const filter = dataArray.filter((object => object.name.includes("University")))
     // console.log(filter);
-    const filteredArray = dataArray.filter((object => object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"));
+    const filteredArray = dataArray.filter((object => {
+      return object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"; })
+    );
     console.log(filteredArray);
 
     // this.props.schoolResults[0].location.formattedAddress
