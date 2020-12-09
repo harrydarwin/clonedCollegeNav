@@ -6,12 +6,15 @@ const Header = (props) => {
             <header>
                 <h1>College Navigator</h1>
                 <form action='submit' onSubmit={submitHandler}>
+                    <div className="cityInputs">
                     <input onChange={handleCityInput} type="text" placeholder='City' id='citySearch' required/>
                     <label className='srOnly' htmlFor="citySearch">Please enter a city to search</label>
 
                     <input onChange={handleCountryInput} type="text" placeholder='Province/State OR Country' id='countrySearch' required/>
                     <label className="srOnly" htmlFor="countrySearch">Please enter the country the city is in</label>
-
+                    </div>
+                    
+                    <div className="radiusInputs">
                     <legend>Search Radius</legend>
                     <input onChange={radiusHandler} type="radio" id='shortRadius' name='radius' value='5000' required/>
                     <label htmlFor="shortRadius">5KM</label>
@@ -21,7 +24,9 @@ const Header = (props) => {
                     <label htmlFor="longRadius">25KM</label>
                     <input onChange={radiusHandler} type="radio" id='xLongRadius' name='radius' value='50000' />
                     <label htmlFor="longRadius">50KM</label>
-
+                    </div>
+                    
+                    <div className="schoolTypeInputs">
                     <legend>School Type</legend>
                     <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' required/>
                     <label htmlFor="university">University</label>
@@ -29,6 +34,7 @@ const Header = (props) => {
                     <label htmlFor="college">College</label>
                     <input onChange={schoolHandler} type="radio" id='tradeSchool' name='schoolType' value='4bf58dd8d48988d1ad941735' />
                     <label htmlFor="tradeSchool">Trade School</label>
+                    </div>
 
                     <button>Find Me Schools!</button>
                 </form>
