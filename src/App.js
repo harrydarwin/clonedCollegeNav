@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
+import './App.css';
 import AddSchool from './AddSchool';
 import Favourites from './Favourites.js';
-
 
 
 
@@ -40,6 +40,7 @@ class App extends Component {
   }).then((res) => {
     console.log(res.data.response.venues);
     const dataArray = res.data.response.venues;
+
     // const filter = dataArray.filter((object => object.name.includes("University")))
     // console.log(filter);
     const filteredArray = dataArray.filter((object => {
