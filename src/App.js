@@ -4,6 +4,9 @@ import axios from 'axios';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
 import './App.css';
+import AddSchool from './AddSchool';
+import Favourites from './Favourites.js';
+
 
 
 class App extends Component {
@@ -37,7 +40,12 @@ class App extends Component {
   }).then((res) => {
     console.log(res.data.response.venues);
     const dataArray = res.data.response.venues;
-    const filteredArray = dataArray.filter((object => object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"));
+
+    // const filter = dataArray.filter((object => object.name.includes("University")))
+    // console.log(filter);
+    const filteredArray = dataArray.filter((object => {
+      return object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"; })
+    );
     console.log(filteredArray);
 
     // this.props.schoolResults[0].location.formattedAddress
@@ -105,16 +113,20 @@ class App extends Component {
         handleCountryInput={this.handleCountryInput}
         submitHandler={this.handleSubmit}
         />
-
+        <Favourites />
         <Route exact path="/" render={() => {
           return (
               <SearchResults 
               schoolResults = {this.state.schoolResults} />
           )
         }
-          }/>
-          
-          
+
+        
+         }/>
+        <Route path="/addSchool" component={AddSchool} /> 
+      
+         
+         
 
         {/* <Route exact path="/school/:schoolID" component={SchoolDetails} /> */}
         

@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import AddSchool from './AddSchool'
+
 
 const Header = (props) => {
     const { schoolId, radius, city, schoolHandler, radiusHandler, handleCityInput, handleCountryInput, submitHandler } = props;
