@@ -22,9 +22,17 @@ class App extends Component {
       cityInput: '',
       countryInput: '',
       formattedAddress: [],
-      newSchool: []
+      newSchool: [],
+      favouriteLength: '',
+      isActive: false
     }
   }
+
+  // handleFavouriteLength = (length) => {
+  //   this.setState({
+  //     favouriteLength: length
+  //   }, console.log(this.state.favouriteLength))
+  // }
 
  getData = () => {
    axios({
@@ -117,7 +125,9 @@ class App extends Component {
    this.getData();
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
-       
+  this.setState ({
+    isActive: true
+  })
  }
 
  handleSchoolType = (e) => {
@@ -163,19 +173,31 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
         {/* <Favourites /> */}
-        <Route exact path="/" render={() => {
+        {this.state.isActive 
+        ? <Route exact path="/" render={() => {
           return (
-              <SearchResults 
-              schoolResults = {this.state.schoolResults} />
+            
+            <SearchResults 
+              schoolResults = {this.state.schoolResults}
+              schoolsAdded = {this.state.newSchool}
+              userCityInput = {this.state.cityInput}  
+              userCountryInput = {this.state.countryInput}
+              />
           )
         }
-
-        
-         }/>
+        }/> 
+        : null 
+        }
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
-      
+        {/* <Route path="/favourites" render={() => {
+          return (
+              <Favourites 
+              getFavouritesLength = {() => {this.handleFavouriteLength()} } />
+          )
+        }
+        }/> */}
          
          
 
