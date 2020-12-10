@@ -55,7 +55,7 @@ class Favourites extends Component {
        console.log(this.state.favourites);
        return (
            <Fragment>
-               <h2>Favourites!</h2>
+               <h2>Favourites</h2>
                <ul>
                {
                    this.state.favourites.map((school) => {

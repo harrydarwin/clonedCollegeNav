@@ -43,6 +43,9 @@ class Header extends Component{
             <header>
                 <h1>College Navigator</h1>
                 <form action='submit' onSubmit={submitHandler}>
+                    <div className="wrapper">
+
+                    
                     <div className="cityInputs">
                     <input onChange={handleCityInput} type="text" placeholder='City' id='citySearch' required/>
                     <label className='srOnly' htmlFor="citySearch">Please enter a city to search</label>
@@ -74,6 +77,7 @@ class Header extends Component{
                     </div>
 
                     <button>Find Me Schools!</button>
+                    </div>
                 </form>
                 <nav>
                     <ul>

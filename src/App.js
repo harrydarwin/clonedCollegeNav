@@ -173,6 +173,7 @@ class App extends Component {
         handleCountryInput={this.handleCountryInput}
         submitHandler={this.handleSubmit}
         />
+        <div className="wrapper">
         {/* <Favourites /> */}
         {this.state.isActive 
         ? <Route exact path="/" render={() => {
@@ -207,7 +208,7 @@ class App extends Component {
         
         
 
-        
+        </div>
       </Router>
     )
   }
