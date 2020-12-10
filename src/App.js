@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
+import firebase from './Firebase.js';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
 import './App.css';
@@ -20,7 +21,8 @@ class App extends Component {
       schoolTypeId: '',
       cityInput: '',
       countryInput: '',
-      formattedAddress: []
+      formattedAddress: [],
+      newSchool: []
     }
   }
 
@@ -48,6 +50,7 @@ class App extends Component {
     );
     console.log(filteredArray);
 
+   
     // this.props.schoolResults[0].location.formattedAddress
     
 
@@ -60,6 +63,49 @@ class App extends Component {
   }).catch ((err) => {
     console.log(err, 'It aint working');
   })
+
+   const dbRef = firebase.database().ref();
+   dbRef.on('value', (data) => {
+     const firebaseDataObj = data.val();
+     const newSchoolObject = firebaseDataObj.NewSchools;
+
+     let newSchoolArray = [];
+     let userNewSchool;
+
+     for (let schoolId in newSchoolObject) {
+       userNewSchool = newSchoolObject [schoolId];
+       userNewSchool.id = schoolId;
+      //  userNewSchool.notes = this.state.schoolNotes
+       newSchoolArray.push(userNewSchool);
+     }
+     //4bf58dd8d48988d1ae941735-University
+     //  Community College- 4bf58dd8d48988d1a2941735
+     //  Trade School- 4bf58dd8d48988d1ad941735
+     let userSchoolType= '';
+     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735'){
+       userSchoolType = 'University'
+     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735'){
+       userSchoolType = 'Community College'
+     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735'){
+        userSchoolType = 'Trade School'
+     }
+     console.log(userSchoolType, 'school type');
+     console.log(this.state.cityInput, 'city type');
+
+
+     const filteredNewSchoolArray = newSchoolArray.filter((object => {
+       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput) 
+     })
+     );
+
+     console.log(filteredNewSchoolArray, 'filtered school type');
+
+     this.setState({
+       newSchool: newSchoolArray
+     })
+     console.log(this.state.newSchool, 'new school array');
+   })
+
  }
 
  handleSubmit = (e) => {
@@ -67,8 +113,7 @@ class App extends Component {
    this.getData();
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
-    
-   
+       
  }
 
  handleSchoolType = (e) => {
@@ -113,7 +158,7 @@ class App extends Component {
         handleCountryInput={this.handleCountryInput}
         submitHandler={this.handleSubmit}
         />
-        <Favourites />
+        {/* <Favourites /> */}
         <Route exact path="/" render={() => {
           return (
               <SearchResults 
@@ -123,7 +168,9 @@ class App extends Component {
 
         
          }/>
+
         <Route path="/addSchool" component={AddSchool} /> 
+        <Route path="/favourites" component={Favourites} /> 
       
          
          
