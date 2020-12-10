@@ -102,9 +102,8 @@ class App extends Component {
 
 
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput)
+       
       //  making inputs and comparison case sensitive
-
        const addedSchoolCity = object.schoolAddress[1].toLowerCase();
        const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
        return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
@@ -127,7 +126,6 @@ class App extends Component {
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
     
-   
   this.setState ({
     isActive: true,
   })
@@ -166,9 +164,6 @@ class App extends Component {
       <Router>
         
         <Header
-        // schoolId={this.schoolTypeId}
-        // radius={this.state.radius}
-        // city={this.state.cityInput}
         schoolHandler={this.handleSchoolType}
         radiusHandler={this.handleRadius}
         handleCityInput={this.handleCityInput}
@@ -176,8 +171,20 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
         <div className="wrapper">
+          {this.state.isActive
+            ? 
+                  <SearchResults
+                    schoolResults={this.state.schoolResults}
+                    schoolsAdded={this.state.newSchool}
+                    userCityInput={this.state.cityInput}
+                    userCountryInput={this.state.countryInput}
+                  />
+            : null
+            }
+              
+          
         {/* <Favourites /> */}
-        {this.state.isActive 
+        {/* {this.state.isActive 
         ? <Route exact path="/" render={() => {
           return (
             <>
@@ -191,7 +198,7 @@ class App extends Component {
           )
         }
          }/>  : null 
-      }
+      } */}
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 

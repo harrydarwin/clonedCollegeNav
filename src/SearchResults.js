@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react';
+import React, { Component, useRef } from 'react';
 import firebase from './Firebase.js';
 
 
@@ -8,15 +8,18 @@ class SearchResults extends Component {
         super();
 
         this.state = {
-            // schoolName:'',
-            // schoolAddress: []
             savedSchool: {
                 schoolName: '',
                 schoolAddress: [],
             }
         }
+        const sectionRef = useRef();
     }
 
+    componentDidMount() {
+        console.log(this.sectionRef)
+        // this.sectionRef.current.scrollIntoView();
+    }
 
     handleAddFav = (name, address) => {
         // console.log(name, address);
@@ -36,12 +39,12 @@ class SearchResults extends Component {
     
     render(){
         return(
-            <Fragment>
+            <section ref={this.sectionRef}>
                 <h2>Your search results for {this.props.userCityInput}, {this.props.userCountryInput}</h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
-                    <div className="schoolResults">
+                    <div className="schoolResults" ref={this.sectionRef}>
                         <details key={schoolObj.id}>
                             <summary>{schoolObj.name}</summary>
                                 <p>{schoolObj.location.formattedAddress.join(', ')}</p>
@@ -70,7 +73,7 @@ class SearchResults extends Component {
                     )
                 })
                 }
-            </Fragment>
+            </section>
             
         
         )
