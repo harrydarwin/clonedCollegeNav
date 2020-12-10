@@ -94,11 +94,15 @@ class App extends Component {
 
 
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput) 
+      //  making inputs and comparison case sensitive
+
+       const addedSchoolCity = object.schoolAddress[1].toLowerCase();
+       const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
+       return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
      })
      );
 
-     console.log(filteredNewSchoolArray, 'filtered school type');
+     console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
        newSchool: newSchoolArray
