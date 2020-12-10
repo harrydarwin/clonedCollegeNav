@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import React, { Component, useRef } from 'react';
+=======
+import { Component, Fragment } from 'react';
+import sideImage from "./assets/sideImage.jpg"
+>>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
 import firebase from './Firebase.js';
 
 
@@ -39,8 +44,15 @@ class SearchResults extends Component {
     
     render(){
         return(
+<<<<<<< HEAD
             <section ref={this.sectionRef}>
                 <h2>Your search results for {this.props.userCityInput}, {this.props.userCountryInput}</h2>
+=======
+            <Fragment>
+                <div className="combinedSchools">
+                <div className="searchedSchools">
+                <h2>Your search results for <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
+>>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
@@ -57,6 +69,9 @@ class SearchResults extends Component {
                     )
                 })
                 }
+                </div>
+                <div className="addedSchool">
+                <h2>User's Added Institutions</h2>
                 {
                 this.props.schoolsAdded.map((newSchoolObj) => {
                     return(
@@ -73,7 +88,13 @@ class SearchResults extends Component {
                     )
                 })
                 }
+<<<<<<< HEAD
             </section>
+=======
+                </div>
+                </div>
+            </Fragment>
+>>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
             
         
         )

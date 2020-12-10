@@ -55,6 +55,7 @@ class Favourites extends Component {
        console.log(this.state.favourites);
        return (
            <Fragment>
+               <div className="favorites">
                <h2>Favourites</h2>
                <ul>
                {
@@ -79,6 +80,7 @@ class Favourites extends Component {
                    })
                }
                </ul>
+               </div>
            </Fragment>
        )
    }

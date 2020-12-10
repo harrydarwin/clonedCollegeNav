@@ -72,13 +72,15 @@ h1 {
 
 
 h2 {
-  margin-left: 20px;
   margin-top: 20px;
 }
 
 body {
   font-family: 'Barlow', sans-serif;
   font-size: 1.8rem;
+  background-color: rgb(200, 229, 255);
+  /* background-image: url(./assets/class.jpg); */
+  /* background-size: cover; */
 }
 
 form {
@@ -110,12 +112,12 @@ header button, .addSchoolButton {
   background-color:white;
   color: #073330;
   font-weight: 700;
-  border:#b1bc2b;
+  border: #b1bc2b;
 }
 
 nav {
   background-color:#b1bc2b ;
-  color: #073330;
+  border-bottom:2px solid #073330;
   padding: 15px;
 }
 
@@ -165,7 +167,19 @@ summary {
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+  background-color: white;
 }
+
+.schoolResults button {
+  padding: 10px 0;
+}
+
+.combinedSchools {
+      display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
 
 .favoritesFlex {
   display: flex;
@@ -174,15 +188,30 @@ summary {
   border: 2px solid #b1bc2b;
   width: 40% ;
   padding-left: 10px;
+  background-color: white;
 }
 
 .favoritesFlex button{
   margin: 10px 0;
-  background-color: #073330;
+  background-color:#073330;
   color:white;
+  font-weight: 600;
+  padding: 10px 0;
   border:none;
   width: 40%;
   margin-right: 5px;
+}
+
+.favoritesFlex h3 {
+  margin: 10px 0;
+}
+
+.favoritesFlex p{
+  margin: 5px 0;
+}
+
+.favoritesFlex textarea {
+  margin-top:10px;
 }
 
 .buttonFlex {
@@ -204,6 +233,15 @@ textarea {
   flex-direction: column;
 }
 
-.addSchoolButton{
+.addSchoolButton {
   margin: 10px 0;
+
 }
+
+.addSchoolForm {
+  margin-top: 2%;
+}
+
+.searchedSchools span {
+  text-transform: capitalize;
+} 
