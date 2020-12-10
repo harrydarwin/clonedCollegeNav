@@ -24,7 +24,8 @@ class App extends Component {
       formattedAddress: [],
       newSchool: [],
       favouriteLength: '',
-      isActive: false
+      isActive: false,
+      word: ""
     }
   }
 
@@ -126,7 +127,7 @@ class App extends Component {
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
   this.setState ({
-    isActive: true
+    isActive: true,
   })
  }
 
@@ -176,13 +177,14 @@ class App extends Component {
         {this.state.isActive 
         ? <Route exact path="/" render={() => {
           return (
-            
+            <>
             <SearchResults 
               schoolResults = {this.state.schoolResults}
               schoolsAdded = {this.state.newSchool}
-              userCityInput = {this.state.cityInput}  
+              userCityInput = {this.state.cityInput}
               userCountryInput = {this.state.countryInput}
               />
+            </>
           )
         }
         }/> 
