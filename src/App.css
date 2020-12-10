@@ -27,7 +27,7 @@ img {
 
 /* Wrapper to constrain content on large sceens */
 .wrapper {
-    max-width: 1200px;
+    /* max-width: 90%; */
     width: 90%;
     margin: 0 auto;
 }
@@ -54,6 +54,7 @@ header {
   display:flex;
   flex-direction: column;
   justify-content: flex-end;
+
   
 }
 
@@ -64,7 +65,15 @@ h1 {
   margin-bottom: 10%;
   background: #416aff59;
   padding: 20px;
-  text-shadow: 2px 2px 2px #b1bc2b  ;
+  text-shadow: 2px 2px 2px #b1bc2b;
+  padding-left: 5%
+}
+
+
+
+h2 {
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 body {
@@ -95,7 +104,7 @@ input[type="radio"] {
   margin:10px 20px;
 }
 
-header button {
+header button, .addSchoolButton {
   width: 20%;
   padding: 10px;
   background-color:white;
@@ -155,5 +164,46 @@ summary {
   width: 30%;
   display: flex;
   flex-direction: column;
+  margin: 10px 0;
+}
+
+.favoritesFlex {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  border: 2px solid #b1bc2b;
+  width: 40% ;
+  padding-left: 10px;
+}
+
+.favoritesFlex button{
+  margin: 10px 0;
+  background-color: #073330;
+  color:white;
+  border:none;
+  width: 40%;
+  margin-right: 5px;
+}
+
+.buttonFlex {
+  display: flex;
+}
+
+textarea {
+  width: calc(80% + 5px);
+}
+
+.addressInputs {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  
+}
+
+.addressInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.addSchoolButton{
   margin: 10px 0;
 }
