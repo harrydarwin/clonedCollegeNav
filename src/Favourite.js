@@ -26,6 +26,7 @@ class Favourite extends Component {
    render() { 
        const {id, schoolName, schoolAddress, schoolNotes} = this.props.school;
        return (
+           <>
            <li key={id}>
                <h3>{schoolName}</h3>
                <p>{schoolAddress}</p>
@@ -36,7 +37,21 @@ class Favourite extends Component {
                <button onClick>Edit Notes</button>
                <button onClick={() => { this.removeSchool(id) }}>Remove School</button>
            </li>
-       )
+       
+           
+           <li key={id} className="favoritesFlex">
+                   <h3>{schoolName}</h3>
+                   <p>{schoolAddress}</p>
+                   <p><span>Notes: </span>{schoolNotes}</p>
+                   <label htmlFor="notes">Notes</label>
+                   <textarea value={this.state.schoolNotes} name="notes" id="notes" onChange={(event) => this.setState({schoolNotes: event.target.value, schoolId: id })}></textarea>
+                   <div className="buttonFlex">
+                   <button onClick={() => { this.handleAddNotes(id) }}>Add Notes</button>
+                   <button onClick={() => { this.removeSchool(id) }}>Remove School</button>
+                   </div>
+               </li>
+            </>
+           )
    }
 }
 export default Favourite;

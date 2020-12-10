@@ -56,6 +56,7 @@ class AddSchool extends Component {
                         <input type="text" id="newSchoolName"
                         value={this.state.schoolName}
                         onChange={(event) => this.setState({schoolName: event.target.value})}/><br/>
+                    <div className="schoolTypeInputs">
                     <legend>School Type</legend>
                         <input type="radio" id='university' name='schoolType' 
                         value='University' required 
@@ -72,31 +73,44 @@ class AddSchool extends Component {
                         checked={this.state.schoolType === "Trade School"}
                         onChange={(event) => this.setState({ schoolType: event.target.value })}/>
                     <label htmlFor="tradeSchool">Trade School</label><br/>
+                    </div>
+                    <div className="addressInputs">
+                        <div className="addressInput">
                     <label htmlFor="newSchoolAddress">Address</label>
                         <input type="text" id="newSchoolAddress"
                         value={this.state.schoolAddress.street}
                         onChange={(event) => this.updateAddress(event, 'street')}/>
+                        </div>
+                        <div className="addressInput">
                     <label htmlFor="newSchoolCity">City</label>
                         <input type="text" id="newSchoolCity" 
                         value={this.state.schoolAddress.city}
-                        onChange={(event) => this.updateAddress(event, 'city')} /><br/>
+                        onChange={(event) => this.updateAddress(event, 'city')} />
+                        </div>
+                        <div className="addressInput">
                     <label htmlFor="newSchoolProvince">Province</label>
                     <input type="text" id="newSchoolProvince"
                         value={this.state.schoolAddress.province}
                         onChange={(event) => this.updateAddress(event, 'province')} />
+                        </div>
+                        <div className="addressInput">
                     <label htmlFor="newSchoolPostal">Postal Code</label>
                         <input type="text" id="newSchoolPostal" 
                         value={this.state.schoolAddress.postalCode}
                         onChange={(event) => this.updateAddress(event, 'postalCode')} />
+                        </div>
+                        <div className="addressInput">
                     <label htmlFor="newSchoolCountry">Country</label>
                         <input type="text" id="newSchoolCountry"
                         value={this.state.schoolAddress.country}
-                        onChange={(event) => this.updateAddress(event, 'country')} /><br/>
+                        onChange={(event) => this.updateAddress(event, 'country')} />
+                        </div>
+                        </div>
                     <label htmlFor="addNote">Note</label>
                         <textarea
                         value={this.state.schoolNote}
                         onChange={(event) => this.setState({ schoolNote: event.target.value })}></textarea><br/>
-                    <button onClick={this.addSchool}>Add new school</button>
+                    <button className="addSchoolButton" onClick={this.addSchool}>Add new school</button>
                 </form>
             </Fragment>
         )

@@ -29,10 +29,10 @@ class Favourites extends Component {
                 userFavourite.notes = this.state.schoolNotes
                 favouritesArray.push(userFavourite);
             }
+
             this.setState({
                 favourites: favouritesArray
             })
-            console.log(this.state.favourites);
         })
     }
 
@@ -55,7 +55,7 @@ class Favourites extends Component {
        console.log(this.state.favourites);
        return (
            <Fragment>
-               <h2>Favourites!</h2>
+               <h2>Favourites</h2>
                <ul>
                {
                    this.state.favourites.map((school) => {
