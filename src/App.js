@@ -198,13 +198,8 @@ class App extends Component {
               
           
         {/* <Favourites /> */}
-<<<<<<< HEAD
-        {/* {this.state.isActive 
-        ? <Route exact path="/" render={() => {
-=======
         {this.state.isActive 
             ? <Route exact path="/project6CollegeNavigator" render={() => {
->>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
           return (
             <>
             <SearchResults 
@@ -217,7 +212,7 @@ class App extends Component {
           )
         }
          }/>  : null 
-      } */}
+      } 
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
