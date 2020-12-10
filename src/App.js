@@ -22,9 +22,17 @@ class App extends Component {
       cityInput: '',
       countryInput: '',
       formattedAddress: [],
-      newSchool: []
+      newSchool: [],
+      favouriteLength: '',
+      isActive: false
     }
   }
+
+  // handleFavouriteLength = (length) => {
+  //   this.setState({
+  //     favouriteLength: length
+  //   }, console.log(this.state.favouriteLength))
+  // }
 
  getData = () => {
    axios({
@@ -46,7 +54,7 @@ class App extends Component {
     // const filter = dataArray.filter((object => object.name.includes("University")))
     // console.log(filter);
     const filteredArray = dataArray.filter((object => {
-      return object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"; })
+      return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
     );
     console.log(filteredArray);
 
@@ -94,11 +102,15 @@ class App extends Component {
 
 
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput) 
+      //  making inputs and comparison case sensitive
+
+       const addedSchoolCity = object.schoolAddress[1].toLowerCase();
+       const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
+       return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
      })
      );
 
-     console.log(filteredNewSchoolArray, 'filtered school type');
+     console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
        newSchool: newSchoolArray
@@ -113,7 +125,9 @@ class App extends Component {
    this.getData();
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
-       
+  this.setState ({
+    isActive: true
+  })
  }
 
  handleSchoolType = (e) => {
@@ -159,19 +173,31 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
         {/* <Favourites /> */}
-        <Route exact path="/" render={() => {
+        {this.state.isActive 
+        ? <Route exact path="/" render={() => {
           return (
-              <SearchResults 
-              schoolResults = {this.state.schoolResults} />
+            
+            <SearchResults 
+              schoolResults = {this.state.schoolResults}
+              schoolsAdded = {this.state.newSchool}
+              userCityInput = {this.state.cityInput}  
+              userCountryInput = {this.state.countryInput}
+              />
           )
         }
-
-        
-         }/>
+        }/> 
+        : null 
+        }
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
-      
+        {/* <Route path="/favourites" render={() => {
+          return (
+              <Favourites 
+              getFavouritesLength = {() => {this.handleFavouriteLength()} } />
+          )
+        }
+        }/> */}
          
          
 

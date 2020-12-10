@@ -1,9 +1,44 @@
+import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import AddSchool from './AddSchool'
+import firebase from './Firebase'
+// import AddSchool from './AddSchool'
 
 
-const Header = (props) => {
-    const { schoolId, radius, city, schoolHandler, radiusHandler, handleCityInput, handleCountryInput, submitHandler } = props;
+class Header extends Component{
+
+    constructor() {
+        super();
+
+        this.state={
+            favouriteLength:[]
+        }
+    }
+
+    componentDidMount() {
+
+        const dbRef = firebase.database().ref();
+
+        dbRef.on('value', (data) => {
+            const firebaseDataObj = data.val();
+            const favouritesObject = firebaseDataObj.Favourites;
+            console.log(favouritesObject, "please work or i'll be sad");
+            let newFavouriteArray = [];
+            let favouriteSchool;
+
+            for (let favourite in favouritesObject) {
+                favouriteSchool = favouritesObject[favourite];
+                newFavouriteArray.push(favouriteSchool);
+            }
+
+            console.log(newFavouriteArray.length - 1);
+            this.setState({
+                favouritesLength: newFavouriteArray.length - 1
+            })
+        })
+    }
+
+    render() {
+    const { schoolHandler, radiusHandler, handleCityInput, handleCountryInput, submitHandler } = this.props;
         return (
             <header>
                 <h1>College Navigator</h1>
@@ -24,8 +59,8 @@ const Header = (props) => {
                     <label htmlFor="mediumRadius">10KM</label>
                     <input onChange={radiusHandler} type="radio" id='longRadius' name='radius' value='25000' />
                     <label htmlFor="longRadius">25KM</label>
-                    <input onChange={radiusHandler} type="radio" id='xLongRadius' name='radius' value='50000' />
-                    <label htmlFor="longRadius">50KM</label>
+                    <input onChange={radiusHandler} type="radio" id='xlongRadius' name='radius' value='50000' />
+                    <label htmlFor="xlongRadius">50KM</label>
                     </div>
                     
                     <div className="schoolTypeInputs">
@@ -47,7 +82,7 @@ const Header = (props) => {
                             <NavLink activeClassName="active" exact to="/">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active" to="/favourites">Favourite Schools</NavLink>
+                            <NavLink activeClassName="active" to="/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
                         </li>
                         <li>
                             <NavLink activeClassName="active" to="/addSchool">Add School</NavLink>
@@ -56,6 +91,7 @@ const Header = (props) => {
                 </nav>
             </header>
         )
+    }
 }
 
 export default Header;

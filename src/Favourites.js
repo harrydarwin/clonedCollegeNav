@@ -29,10 +29,10 @@ class Favourites extends Component {
                 userFavourite.notes = this.state.schoolNotes
                 favouritesArray.push(userFavourite);
             }
+
             this.setState({
                 favourites: favouritesArray
             })
-            console.log(this.state.favourites);
         })
     }
 
