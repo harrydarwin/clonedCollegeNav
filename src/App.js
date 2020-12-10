@@ -78,17 +78,12 @@ class App extends Component {
     console.log(this.state.schoolResults[0].location.formattedAddress);
 
   }).catch ((err) => {
-<<<<<<< HEAD
-    console.log(err, 'It aint working');
-    alert("Please enter a valid city and province/country")
-=======
     Swal.fire({
       title: "No schools found",
       text: "Please Try Another City and Province/Country",
       icon: "error",
       confirmButtonText: "Ok",
     })
->>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
   })
 
    const dbRef = firebase.database().ref();
@@ -133,10 +128,7 @@ class App extends Component {
 
      this.setState({
        newSchool: filteredNewSchoolArray
-<<<<<<< HEAD
-=======
        
->>>>>>> 2330286a5ada5ebdcb9ac6ccd20742bc06d9a6a2
      })
      console.log(this.state.newSchool, 'new school array');
    })
