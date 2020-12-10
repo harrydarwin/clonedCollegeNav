@@ -54,6 +54,8 @@ class App extends Component {
 
     // const filter = dataArray.filter((object => object.name.includes("University")))
     // console.log(filter);
+
+
     const filteredArray = dataArray.filter((object => {
       return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
     );
@@ -71,6 +73,7 @@ class App extends Component {
 
   }).catch ((err) => {
     console.log(err, 'It aint working');
+    alert("Please enter a valid city and province/country")
   })
 
    const dbRef = firebase.database().ref();
@@ -114,7 +117,7 @@ class App extends Component {
      console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
-       newSchool: newSchoolArray
+       newSchool: filteredNewSchoolArray
      })
      console.log(this.state.newSchool, 'new school array');
    })
