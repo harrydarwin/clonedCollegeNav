@@ -12,7 +12,7 @@ class SearchResults extends Component {
             // schoolAddress: []
             savedSchool: {
                 schoolName: '',
-                schoolAddress: []
+                schoolAddress: [],
             }
         }
     }
@@ -37,6 +37,7 @@ class SearchResults extends Component {
     render(){
         return(
             <Fragment>
+                <h2>Your search results for {this.props.userCityInput}, {this.props.userCountryInput}</h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
@@ -47,6 +48,22 @@ class SearchResults extends Component {
                         </details>
                         <button 
                         onClick={ () => {this.handleAddFav(schoolObj.name, schoolObj.location.formattedAddress)} }
+                        >Add to favourites
+                        </button>
+                    </div>
+                    )
+                })
+                }
+                {
+                this.props.schoolsAdded.map((newSchoolObj) => {
+                    return(
+                    <div className="schoolResults">
+                        <details key={newSchoolObj.id}>
+                            <summary>{newSchoolObj.schoolName}</summary>
+                                <p>{newSchoolObj.schoolAddress.join(', ')}</p>
+                        </details>
+                        <button 
+                        onClick={ () => {this.handleAddFav(newSchoolObj.schoolName, newSchoolObj.schoolAddress)} }
                         >Add to favourites
                         </button>
                     </div>
