@@ -37,7 +37,7 @@ class SearchResults extends Component {
     render(){
         return(
             <Fragment>
-                <h2>Your search results for {this.props.userCityInput}, {this.props.userCountryInput}</h2>
+                {console.log(this.props.schoolResults[0])}
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
