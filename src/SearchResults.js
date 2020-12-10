@@ -1,4 +1,5 @@
 import { Component, Fragment } from 'react';
+import sideImage from "./assets/sideImage.jpg"
 import firebase from './Firebase.js';
 
 
@@ -37,7 +38,9 @@ class SearchResults extends Component {
     render(){
         return(
             <Fragment>
-                <h2>Your search results for {this.props.userCityInput}, {this.props.userCountryInput}</h2>
+                <div className="combinedSchools">
+                <div className="searchedSchools">
+                <h2>Your search results for <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
@@ -54,6 +57,9 @@ class SearchResults extends Component {
                     )
                 })
                 }
+                </div>
+                <div className="addedSchool">
+                <h2>User's Added Institutions</h2>
                 {
                 this.props.schoolsAdded.map((newSchoolObj) => {
                     return(
@@ -70,6 +76,8 @@ class SearchResults extends Component {
                     )
                 })
                 }
+                </div>
+                </div>
             </Fragment>
             
         
