@@ -22,9 +22,16 @@ class App extends Component {
       cityInput: '',
       countryInput: '',
       formattedAddress: [],
-      newSchool: []
+      newSchool: [],
+      favouriteLength: ''
     }
   }
+
+  // handleFavouriteLength = (length) => {
+  //   this.setState({
+  //     favouriteLength: length
+  //   }, console.log(this.state.favouriteLength))
+  // }
 
  getData = () => {
    axios({
@@ -175,7 +182,13 @@ class App extends Component {
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
-      
+        {/* <Route path="/favourites" render={() => {
+          return (
+              <Favourites 
+              getFavouritesLength = {() => {this.handleFavouriteLength()} } />
+          )
+        }
+        }/> */}
          
          
 
