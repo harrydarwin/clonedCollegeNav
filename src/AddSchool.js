@@ -51,6 +51,7 @@ class AddSchool extends Component {
     render(){
         return(
             <Fragment>
+                <div className="addSchoolForm">
                 <form >
                     <label htmlFor="newSchoolName">School Name</label>
                         <input type="text" id="newSchoolName"
@@ -112,6 +113,7 @@ class AddSchool extends Component {
                         onChange={(event) => this.setState({ schoolNote: event.target.value })}></textarea><br/>
                     <button className="addSchoolButton" onClick={this.addSchool}>Add new school</button>
                 </form>
+                </div>
             </Fragment>
         )
     }

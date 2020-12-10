@@ -31,8 +31,8 @@ class Favourite extends Component {
                    <h3>{schoolName}</h3>
                    <p>{schoolAddress}</p>
                    <p><span>Notes: </span>{schoolNotes}</p>
-                   <label htmlFor="notes">Notes</label>
-                   <textarea value={this.state.schoolNotes} name="notes" id="notes" onChange={(event) => this.setState({schoolNotes: event.target.value, schoolId: id })}></textarea>
+                   <label htmlFor="notes" className="srOnly">Notes: type below to add</label>
+                   <textarea placeholder="Type here to add notes" value={this.state.schoolNotes} name="notes" id="notes" onChange={(event) => this.setState({schoolNotes: event.target.value, schoolId: id })}></textarea>
                    <div className="buttonFlex">
                    <button onClick={() => { this.handleAddNotes(id) }}>Add Notes</button>
                    <button onClick={() => { this.removeSchool(id) }}>Remove School</button>

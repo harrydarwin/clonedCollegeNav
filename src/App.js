@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 import firebase from './Firebase.js';
 import Header from './Header.js';
@@ -9,6 +10,9 @@ import AddSchool from './AddSchool';
 import Favourites from './Favourites.js';
 
 
+
+let city = "";
+let country = "";
 
 class App extends Component {
   constructor() {
@@ -34,6 +38,8 @@ class App extends Component {
   //     favouriteLength: length
   //   }, console.log(this.state.favouriteLength))
   // }
+
+
 
  getData = () => {
    axios({
@@ -70,7 +76,12 @@ class App extends Component {
     console.log(this.state.schoolResults[0].location.formattedAddress);
 
   }).catch ((err) => {
-    console.log(err, 'It aint working');
+    Swal.fire({
+      title: "No schools found",
+      text: "Please Try Another City and Province/Country",
+      icon: "error",
+      confirmButtonText: "Ok",
+    })
   })
 
    const dbRef = firebase.database().ref();
@@ -114,11 +125,13 @@ class App extends Component {
      console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
-       newSchool: newSchoolArray
+       newSchool: filteredNewSchoolArray
+       
      })
      console.log(this.state.newSchool, 'new school array');
    })
-
+   city = this.state.cityInput;
+   country = this.state.countryInput;
  }
 
  handleSubmit = (e) => {
@@ -129,6 +142,7 @@ class App extends Component {
   this.setState ({
     isActive: true,
   })
+  console.log(this.state.isActive);
  }
 
  handleSchoolType = (e) => {
@@ -176,14 +190,14 @@ class App extends Component {
         <div className="wrapper">
         {/* <Favourites /> */}
         {this.state.isActive 
-        ? <Route exact path="/" render={() => {
+            ? <Route exact path="/project6CollegeNavigator" render={() => {
           return (
             <>
             <SearchResults 
               schoolResults = {this.state.schoolResults}
               schoolsAdded = {this.state.newSchool}
-              userCityInput = {this.state.cityInput}
-              userCountryInput = {this.state.countryInput}
+              userCityInput = {city}
+              userCountryInput = {country}
               />
             </>
           )
