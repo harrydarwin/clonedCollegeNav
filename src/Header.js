@@ -24,8 +24,8 @@ const Header = (props) => {
                     <label htmlFor="mediumRadius">10KM</label>
                     <input onChange={radiusHandler} type="radio" id='longRadius' name='radius' value='25000' />
                     <label htmlFor="longRadius">25KM</label>
-                    <input onChange={radiusHandler} type="radio" id='xLongRadius' name='radius' value='50000' />
-                    <label htmlFor="longRadius">50KM</label>
+                    <input onChange={radiusHandler} type="radio" id='xlongRadius' name='radius' value='50000' />
+                    <label htmlFor="xlongRadius">50KM</label>
                     </div>
                     
                     <div className="schoolTypeInputs">

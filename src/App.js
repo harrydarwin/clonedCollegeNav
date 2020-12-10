@@ -46,7 +46,7 @@ class App extends Component {
     // const filter = dataArray.filter((object => object.name.includes("University")))
     // console.log(filter);
     const filteredArray = dataArray.filter((object => {
-      return object.categories[0].name === "University" || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School"; })
+      return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
     );
     console.log(filteredArray);
 
@@ -94,11 +94,15 @@ class App extends Component {
 
 
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput) 
+      //  making inputs and comparison case sensitive
+
+       const addedSchoolCity = object.schoolAddress[1].toLowerCase();
+       const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
+       return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
      })
      );
 
-     console.log(filteredNewSchoolArray, 'filtered school type');
+     console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
        newSchool: newSchoolArray
