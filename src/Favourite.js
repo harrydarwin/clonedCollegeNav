@@ -33,6 +33,7 @@ class Favourite extends Component {
                <label htmlFor="notes">Notes</label>
                <textarea value={this.state.schoolNotes} name="notes" id="notes" onChange={(event) => this.setState({schoolNotes: event.target.value, schoolId: id })}></textarea>
                <button onClick={() => { this.handleAddNotes(id) }}>Add Notes</button>
+               <button onClick>Edit Notes</button>
                <button onClick={() => { this.removeSchool(id) }}>Remove School</button>
            </li>
        )
