@@ -26,6 +26,7 @@ class App extends Component {
     }
   }
 
+
  getData = () => {
    axios({
     method: 'GET',
@@ -50,7 +51,6 @@ class App extends Component {
     );
     console.log(filteredArray);
 
-   
     // this.props.schoolResults[0].location.formattedAddress
     
 
@@ -73,28 +73,28 @@ class App extends Component {
      let userNewSchool;
 
      for (let schoolId in newSchoolObject) {
-       userNewSchool = newSchoolObject [schoolId];
+       userNewSchool = newSchoolObject[schoolId];
        userNewSchool.id = schoolId;
-      //  userNewSchool.notes = this.state.schoolNotes
+       //  userNewSchool.notes = this.state.schoolNotes
        newSchoolArray.push(userNewSchool);
      }
      //4bf58dd8d48988d1ae941735-University
      //  Community College- 4bf58dd8d48988d1a2941735
      //  Trade School- 4bf58dd8d48988d1ad941735
-     let userSchoolType= '';
-     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735'){
+     let userSchoolType = '';
+     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735') {
        userSchoolType = 'University'
-     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735'){
+     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735') {
        userSchoolType = 'Community College'
-     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735'){
-        userSchoolType = 'Trade School'
+     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735') {
+       userSchoolType = 'Trade School'
      }
      console.log(userSchoolType, 'school type');
      console.log(this.state.cityInput, 'city type');
 
 
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput) 
+       return object.schoolType === userSchoolType && object.schoolAddress.includes(this.state.cityInput)
      })
      );
 
@@ -113,7 +113,8 @@ class App extends Component {
    this.getData();
     //  const address = this.state.schoolResults[0].location.formattedAddress
     //  console.log(address)
-       
+    
+   
  }
 
  handleSchoolType = (e) => {
@@ -168,7 +169,6 @@ class App extends Component {
 
         
          }/>
-
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
       
