@@ -179,8 +179,8 @@ class App extends Component {
         : null 
         }
 
-        <Route path="/addSchool" component={AddSchool} /> 
-        <Route path="/favourites" component={Favourites} /> 
+        <Route path="/project6CollegeNavigator/addSchool" component={AddSchool} /> 
+        <Route path="/project6CollegeNavigator/favourites" component={Favourites} /> 
         </div>
         <Footer />
       </Router>
