@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Redirect, Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -29,6 +29,7 @@ class App extends Component {
       newSchool: [],
       favouriteLength: '',
       isActive: false,
+      directMeHome: false
     }
   }
 
@@ -59,20 +60,12 @@ class App extends Component {
 
     this.setState({
       schoolResults: filteredArray,
-<<<<<<< HEAD
-      isActive: true
-=======
       isActive:true
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     })
 
   }).catch ((err) => {
     this.setState({
-<<<<<<< HEAD
-      isActive: false
-=======
       isActive:false
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     })
     Swal.fire({
       title: "No schools found",
@@ -132,6 +125,9 @@ class App extends Component {
  handleSubmit = (e) => {
    e.preventDefault();
    this.getData();
+   this.setState({
+     directMeHome: true
+   })
  }
 
  handleSchoolType = (e) => {
@@ -172,21 +168,6 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
         <div className="wrapper">
-<<<<<<< HEAD
-          {this.state.isActive
-            ? 
-                  <SearchResults
-                    schoolResults={this.state.schoolResults}
-                    schoolsAdded={this.state.newSchool}
-                    userCityInput={this.state.cityInput}
-                    userCountryInput={this.state.countryInput}
-                  />
-            : null
-            }
-              
-          
-=======
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         {this.state.isActive 
             ? <Route exact path="/project6CollegeNavigator" render={() => {
           return (
@@ -205,11 +186,6 @@ class App extends Component {
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
-<<<<<<< HEAD
-        
-
-=======
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         </div>
         <Footer />
       </Router>

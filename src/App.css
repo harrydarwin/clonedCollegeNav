@@ -236,14 +236,8 @@ html {
 }
 
 img {
-<<<<<<< HEAD
-    height:auto;
-    display: block;
-    scroll-behavior: smooth;
-=======
   height: auto;
   display: block;
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
 }
 
 /* Wrapper to constrain content on large sceens */
@@ -486,6 +480,7 @@ footer {
   text-align: center;
   background-color: #416bff;
   font-weight: 500;
+  padding: 10px 0;
 }
 
 /* hover Focus */
@@ -502,6 +497,8 @@ a:focus {
 }
 
 @media (max-width: 980px) {
+  
+
   .combinedSchools {
     display: grid;
     grid-template-columns: 1fr;
@@ -522,6 +519,15 @@ a:focus {
 }
 
 @media (max-width: 780px) {
+
+  header {
+    height: auto;
+  }
+
+  h1 {
+    font-size: 8rem;
+  }
+
   nav ul {
     flex-direction: column;
     justify-content: center;
@@ -534,6 +540,11 @@ a:focus {
 }
 
 @media (max-width: 480px) {
+
+  h1 {
+    font-size: 4rem;
+  }
+
   nav ul {
     flex-direction: column;
     justify-content: center;
@@ -546,7 +557,7 @@ a:focus {
 
   .schoolResults {
     min-width: 300px;
-    margin: ;
+    
   }
 
   .addedSchool .schoolResults {

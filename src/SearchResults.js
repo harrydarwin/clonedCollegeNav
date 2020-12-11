@@ -14,9 +14,6 @@ class SearchResults extends Component {
                 schoolAddress: [],
             }
         }
-<<<<<<< HEAD
-        this.sectionRef = React.createRef();
-=======
 
         this.sectionRef = React.createRef();
     }
@@ -38,7 +35,6 @@ class SearchResults extends Component {
             icon: "success",
             confirmButtonText: "Ok",
         })
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     }
 
     // componentDidMount() {
@@ -47,10 +43,6 @@ class SearchResults extends Component {
     // }
 
     handleAddFav = (name, address) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         const dbFavouritesRef = firebase.database().ref('Favourites')
         const favouriteSchool = {
             schoolName: name,

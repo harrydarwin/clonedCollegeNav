@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import firebase from './Firebase'
 
 
@@ -9,7 +9,8 @@ class Header extends Component{
         super();
 
         this.state={
-            favouriteLength:[]
+            favouriteLength:[],
+            redirect: false
         }
     }
 
@@ -32,6 +33,18 @@ class Header extends Component{
                 favouritesLength: newFavouriteArray.length - 1
             })
         })
+    }
+
+    setRedirect = () => {
+        this.setState({
+            redirect: true
+        })
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect) {
+            return <Redirect to="/project6CollegeNavigator" />
+        }
     }
 
     render() {
@@ -73,7 +86,8 @@ class Header extends Component{
                     <label htmlFor="tradeSchool">Trade School</label>
                     </div>
 
-                    <button>Find Me Schools!</button>
+                    {this.renderRedirect()}
+                    <button onClick={this.setRedirect}>Find Me Schools!</button>
                     </div>
                 </form>
                 <nav>
