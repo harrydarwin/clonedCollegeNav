@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import firebase from './Firebase.js';
+import Swal from 'sweetalert2'
 
 
 class SearchResults extends Component {
@@ -13,7 +14,31 @@ class SearchResults extends Component {
                 schoolAddress: [],
             }
         }
+<<<<<<< HEAD
         this.sectionRef = React.createRef();
+=======
+
+        this.sectionRef = React.createRef();
+    }
+
+    componentDidMount() {
+        this.sectionRef.current.scrollIntoView();
+    }
+    
+    
+    
+
+
+    removeSchool = (schoolRef) => {
+        const dbFavouritesRef = firebase.database().ref('NewSchools');
+        dbFavouritesRef.child(schoolRef).remove();
+        Swal.fire({
+            title: "Institution Removed",
+            text: "thank you",
+            icon: "success",
+            confirmButtonText: "Ok",
+        })
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     }
 
     // componentDidMount() {
@@ -22,6 +47,10 @@ class SearchResults extends Component {
     // }
 
     handleAddFav = (name, address) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         const dbFavouritesRef = firebase.database().ref('Favourites')
         const favouriteSchool = {
             schoolName: name,
@@ -29,6 +58,13 @@ class SearchResults extends Component {
             schoolNotes: ''
         }
         dbFavouritesRef.push(favouriteSchool);
+
+        Swal.fire({
+            title: "Institution Added",
+            text: "thank you",
+            icon: "success",
+            confirmButtonText: "Ok",
+        })
     }
     
     render(){
@@ -36,7 +72,7 @@ class SearchResults extends Component {
             <section>
                 <div className="combinedSchools">
                 <div className="searchedSchools">
-                <h2>Your search results for <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
+                <h2 ref={this.sectionRef}>Search results: <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
@@ -64,10 +100,16 @@ class SearchResults extends Component {
                             <summary>{newSchoolObj.schoolName}</summary>
                                 <p>{newSchoolObj.schoolAddress.join(', ')}</p>
                         </details>
-                        <button 
-                        onClick={ () => {this.handleAddFav(newSchoolObj.schoolName, newSchoolObj.schoolAddress)} }
-                        >Add to favourites
-                        </button>
+                        <div className='buttonFlex'>
+                            <button 
+                            onClick={ () => {this.handleAddFav(newSchoolObj.schoolName, newSchoolObj.schoolAddress)} }
+                            >Add to favourites
+                            </button>
+                            <button 
+                            onClick={ () => {this.removeSchool(newSchoolObj.id)} }
+                            >Remove School
+                            </button>
+                        </div>
                     </div>
                     )
                 })

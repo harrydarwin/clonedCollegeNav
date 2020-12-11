@@ -1,6 +1,6 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import axios from 'axios';
 import firebase from './Firebase.js';
 import Header from './Header.js';
@@ -8,7 +8,7 @@ import SearchResults from './SearchResults.js';
 import './App.css';
 import AddSchool from './AddSchool';
 import Favourites from './Favourites.js';
-
+import Footer from './Footer.js';
 
 
 let city = "";
@@ -29,16 +29,8 @@ class App extends Component {
       newSchool: [],
       favouriteLength: '',
       isActive: false,
-      word: ""
     }
   }
-
-  // handleFavouriteLength = (length) => {
-  //   this.setState({
-  //     favouriteLength: length
-  //   }, console.log(this.state.favouriteLength))
-  // }
-
 
 
  getData = () => {
@@ -55,28 +47,32 @@ class App extends Component {
       v: 20201205
             }
   }).then((res) => {
-    console.log(res.data.response.venues);
     const dataArray = res.data.response.venues;
 
-    // const filter = dataArray.filter((object => object.name.includes("University")))
-    // console.log(filter);
+
     const filteredArray = dataArray.filter((object => {
       return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
     );
-    console.log(filteredArray);
 
     // this.props.schoolResults[0].location.formattedAddress
     
 
     this.setState({
       schoolResults: filteredArray,
+<<<<<<< HEAD
       isActive: true
+=======
+      isActive:true
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     })
-    console.log(this.state.schoolResults[0].location.formattedAddress);
 
   }).catch ((err) => {
     this.setState({
+<<<<<<< HEAD
       isActive: false
+=======
+      isActive:false
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
     })
     Swal.fire({
       title: "No schools found",
@@ -111,30 +107,27 @@ class App extends Component {
      } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735') {
        userSchoolType = 'Trade School'
      }
-     console.log(userSchoolType, 'school type');
-     console.log(this.state.cityInput, 'city type');
 
-
+     
      const filteredNewSchoolArray = newSchoolArray.filter((object => {
        
       //  making inputs and comparison case sensitive
        const addedSchoolCity = object.schoolAddress[1].toLowerCase();
        const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
+
        return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
      })
      );
 
-     console.log(filteredNewSchoolArray, 'filtered school array');
 
      this.setState({
        newSchool: filteredNewSchoolArray
-       
      })
-     console.log(this.state.newSchool, 'new school array');
    })
    city = this.state.cityInput;
    country = this.state.countryInput;
  }
+
 
  handleSubmit = (e) => {
    e.preventDefault();
@@ -148,14 +141,12 @@ class App extends Component {
  }
 
  handleRadius = (e) => {
-   console.log(e.target.value)
    this.setState({
      radius: e.target.value
    })
  }
 
  handleCityInput = (e) => {
-   console.log(e.target.value)
   this.setState({
     cityInput: e.target.value
   })
@@ -181,6 +172,7 @@ class App extends Component {
         submitHandler={this.handleSubmit}
         />
         <div className="wrapper">
+<<<<<<< HEAD
           {this.state.isActive
             ? 
                   <SearchResults
@@ -193,6 +185,8 @@ class App extends Component {
             }
               
           
+=======
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         {this.state.isActive 
             ? <Route exact path="/project6CollegeNavigator" render={() => {
           return (
@@ -211,9 +205,13 @@ class App extends Component {
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
+<<<<<<< HEAD
         
 
+=======
+>>>>>>> 3325c548d2589c95b9a4888d0fbf966d7bb2da11
         </div>
+        <Footer />
       </Router>
     )
   }

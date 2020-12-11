@@ -1,5 +1,6 @@
 import { Component, Fragment } from 'react';
 import firebase from './Firebase.js';
+import Swal from 'sweetalert2'
 
 class AddSchool extends Component {
     constructor(){
@@ -39,7 +40,31 @@ class AddSchool extends Component {
             schoolNote: this.state.schoolNote
         };
         console.log(userNewSchool, 'newschool');
+
+
         dbRef.push(userNewSchool);
+        
+        // create a notification for add push
+        Swal.fire({
+            title: "New institution added",
+            text: "Thank You",
+            icon: "success",
+            confirmButtonText: "Ok",
+            })
+
+        // clear form
+        this.setState({
+            schoolName: '',
+            schoolNote: '',
+            schoolType: '',
+            schoolAddress: {
+                street: '',
+                city: '',
+                province: '',
+                postalCode: '',
+                country: ''
+            }
+        })
     }
 
     updateAddress = (event, property) =>{
