@@ -269,6 +269,15 @@ header {
   height: 95vh;
 }
 
+.buttonNav {
+  color: #073330;
+  padding: 10px 20px;
+}
+
+.buttonNav:active {
+  color: black;
+}
+
 h1 {
   font-family: "Offside", cursive;
   color: #073330;
@@ -305,6 +314,11 @@ form {
 .radiusInputs,
 .schoolTypeInputs {
   margin: 15px 0;
+}
+
+.radiusInputs div,
+.schoolTypeInputs div {
+  display: inline;
 }
 
 input[type="text"] {
@@ -467,19 +481,37 @@ textarea {
   margin: 2% 0px;
 }
 
+.addSchoolForm input[type="text"] {
+  width: initial;
+}
+
 .searchedSchools span {
   text-transform: capitalize;
 }
 
 /* Footer */
 footer {
-  height: 5vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   background-color: #416bff;
   font-weight: 500;
+  padding: 10px;
+}
+
+footer p {
+  margin-bottom: 15px;
+}
+
+footer a {
+  color: white;
+}
+
+footer a:hover,
+footer a:hover {
+  border-bottom: 2px solid #073330;
 }
 
 /* hover Focus */
@@ -515,19 +547,52 @@ a:focus {
   }
 }
 
-@media (max-width: 780px) {
+@media (max-width: 800px) {
+  header {
+    height: auto;
+  }
+
+  h1 {
+    font-size: 8rem;
+  }
+
   nav ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
+  .schoolTypeInputs div {
+    display: block;
+  }
+
   nav li {
     margin: 10px 0px;
+  }
+
+  .addressInputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cityInputs {
+    width: 60%;
+  }
+
+  .cityInputs input:first-child {
+    margin-bottom: 15px;
+  }
+
+  footer span {
+    display: block;
   }
 }
 
 @media (max-width: 480px) {
+  h1 {
+    font-size: 4rem;
+  }
+
   nav ul {
     flex-direction: column;
     justify-content: center;
@@ -538,12 +603,22 @@ a:focus {
     margin: 10px 0px;
   }
 
+  .radiusInputs div {
+    display: block;
+  }
+
   .schoolResults {
     min-width: 300px;
-    margin: ;
+    margin-bottom: 30px;
   }
 
   .addedSchool .schoolResults {
     min-width: 300px;
+  }
+
+  .combinedSchools {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
   }
 }

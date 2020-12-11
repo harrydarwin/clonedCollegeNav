@@ -86,12 +86,10 @@ class App extends Component {
      for (let schoolId in newSchoolObject) {
        userNewSchool = newSchoolObject [schoolId];
        userNewSchool.id = schoolId;
-      //  userNewSchool.notes = this.state.schoolNotes
+
        newSchoolArray.push(userNewSchool);
      }
-     //4bf58dd8d48988d1ae941735-University
-     //  Community College- 4bf58dd8d48988d1a2941735
-     //  Trade School- 4bf58dd8d48988d1ad941735
+
      let userSchoolType= '';
      if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735'){
        userSchoolType = 'University'
