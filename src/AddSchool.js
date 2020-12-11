@@ -135,7 +135,7 @@ class AddSchool extends Component {
                     <label htmlFor="addNote">Note</label>
                         <textarea
                         value={this.state.schoolNote}
-                        onChange={(event) => this.setState({ schoolNote: event.target.value })}></textarea><br/>
+                        onChange={(event) => this.setState({ schoolNote: event.target.value })}></textarea>
                     <button className="addSchoolButton" onClick={this.addSchool}>Add new school</button>
                 </form>
                 </div>

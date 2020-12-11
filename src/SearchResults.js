@@ -3,6 +3,7 @@ import firebase from './Firebase.js';
 import Swal from 'sweetalert2'
 
 
+
 class SearchResults extends Component {
 
     constructor() {
