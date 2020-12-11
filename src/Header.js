@@ -103,7 +103,7 @@ class Header extends Component{
                 <nav>
                     <ul>
                         <li>
-                            <NavLink activeClassName="active" exact to="/project6CollegeNavigator">Home</NavLink>
+                            <NavLink activeClassName="active" exact to="/">Home</NavLink>
                         </li>
                         <li>
                             <NavLink activeClassName="active" to="/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
