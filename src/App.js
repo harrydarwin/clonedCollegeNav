@@ -163,7 +163,7 @@ class App extends Component {
         />
         <div className="wrapper">
         {this.state.isActive 
-            ? <Route exact path="/" render={() => {
+            ? <Route exact path="/project6CollegeNavigator" render={() => {
           return (
             <>
             <SearchResults 

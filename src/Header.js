@@ -47,7 +47,7 @@ class Header extends Component{
             this.setState({
                 redirect:false
             })
-            return <Redirect to='/' />
+            return <Redirect to='/project6CollegeNavigator' />
         }
     }
 
@@ -103,13 +103,13 @@ class Header extends Component{
                 <nav>
                     <ul>
                         <li>
-                            <NavLink activeClassName="active" exact to="/">Home</NavLink>
+                            <NavLink activeClassName="active" exact to="/project6CollegeNavigator">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active" to="/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
+                            <NavLink activeClassName="active" to="/project6CollegeNavigator/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active" to="/addSchool">Add School</NavLink>
+                            <NavLink activeClassName="active" to="/project6CollegeNavigator/addSchool">Add School</NavLink>
                         </li>
                     </ul>
                 </nav>
