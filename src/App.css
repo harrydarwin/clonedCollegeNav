@@ -23,6 +23,7 @@ html {
 img {
     height:auto;
     display: block;
+    scroll-behavior: smooth;
 }
 
 /* Wrapper to constrain content on large sceens */

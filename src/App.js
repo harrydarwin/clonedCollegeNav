@@ -70,11 +70,14 @@ class App extends Component {
 
     this.setState({
       schoolResults: filteredArray,
-      // formattedAddress:
+      isActive: true
     })
     console.log(this.state.schoolResults[0].location.formattedAddress);
 
   }).catch ((err) => {
+    this.setState({
+      isActive: false
+    })
     Swal.fire({
       title: "No schools found",
       text: "Please Try Another City and Province/Country",
@@ -136,13 +139,6 @@ class App extends Component {
  handleSubmit = (e) => {
    e.preventDefault();
    this.getData();
-    //  const address = this.state.schoolResults[0].location.formattedAddress
-    //  console.log(address)
-    
-  this.setState ({
-    isActive: true,
-  })
-  console.log(this.state.isActive);
  }
 
  handleSchoolType = (e) => {
@@ -197,7 +193,6 @@ class App extends Component {
             }
               
           
-        {/* <Favourites /> */}
         {this.state.isActive 
             ? <Route exact path="/project6CollegeNavigator" render={() => {
           return (
@@ -216,18 +211,6 @@ class App extends Component {
 
         <Route path="/addSchool" component={AddSchool} /> 
         <Route path="/favourites" component={Favourites} /> 
-        {/* <Route path="/favourites" render={() => {
-          return (
-              <Favourites 
-              getFavouritesLength = {() => {this.handleFavouriteLength()} } />
-          )
-        }
-        }/> */}
-         
-         
-
-        {/* <Route exact path="/school/:schoolID" component={SchoolDetails} /> */}
-        
         
 
         </div>

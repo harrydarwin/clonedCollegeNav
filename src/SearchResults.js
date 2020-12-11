@@ -1,5 +1,4 @@
-import { Component, Fragment } from 'react';
-import sideImage from "./assets/sideImage.jpg"
+import React, { Component, Fragment } from 'react';
 import firebase from './Firebase.js';
 
 
@@ -14,21 +13,15 @@ class SearchResults extends Component {
                 schoolAddress: [],
             }
         }
-        const sectionRef = useRef();
+        this.sectionRef = React.createRef();
     }
 
-    componentDidMount() {
-        console.log(this.sectionRef)
-        // this.sectionRef.current.scrollIntoView();
-    }
+    // componentDidMount() {
+    //     console.log(this.sectionRef.current)
+    //     this.sectionRef.current.scrollIntoView();
+    // }
 
     handleAddFav = (name, address) => {
-        // console.log(name, address);
-
-        // this.setState({
-        //     schoolName: name,
-        //     schoolAddress: address,
-        // })
         const dbFavouritesRef = firebase.database().ref('Favourites')
         const favouriteSchool = {
             schoolName: name,
@@ -40,14 +33,14 @@ class SearchResults extends Component {
     
     render(){
         return(
-            <Fragment>
+            <section>
                 <div className="combinedSchools">
                 <div className="searchedSchools">
                 <h2>Your search results for <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
-                    <div className="schoolResults" ref={this.sectionRef}>
+                    <div className="schoolResults">
                         <details key={schoolObj.id}>
                             <summary>{schoolObj.name}</summary>
                                 <p>{schoolObj.location.formattedAddress.join(', ')}</p>
@@ -81,7 +74,7 @@ class SearchResults extends Component {
                 }
                 </div>
                 </div>
-            </Fragment>
+            </section>
             
         
         )
