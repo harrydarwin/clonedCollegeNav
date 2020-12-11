@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import firebase from './Firebase'
+
 
 
 class Header extends Component{
@@ -9,7 +10,8 @@ class Header extends Component{
         super();
 
         this.state={
-            favouriteLength:[]
+            favouriteLength:[],
+            redirect: false
         }
     }
 
@@ -34,7 +36,19 @@ class Header extends Component{
         })
     }
 
-    render() {
+    setRedirect = () => {
+        this.setState({
+            redirect:true
+        })
+    }
+
+    renderRedirect = () => {
+        if(this.state.redirect) {
+            return <Redirect to='project6CollegeNavigator' />
+        }
+    }
+
+    render() {    
     const { schoolHandler, radiusHandler, handleCityInput, handleCountryInput, submitHandler } = this.props;
         return (
             <header>
@@ -52,28 +66,35 @@ class Header extends Component{
                     </div>
                     
                     <div className="radiusInputs">
-                    <legend>Search Radius</legend>
-                    <input onChange={radiusHandler} type="radio" id='shortRadius' name='radius' value='5000' required/>
-                    <label htmlFor="shortRadius">5KM</label>
-                    <input onChange={radiusHandler} type="radio" id='mediumRadius' name='radius' value='10000' />
-                    <label htmlFor="mediumRadius">10KM</label>
-                    <input onChange={radiusHandler} type="radio" id='longRadius' name='radius' value='25000' />
-                    <label htmlFor="longRadius">25KM</label>
-                    <input onChange={radiusHandler} type="radio" id='xlongRadius' name='radius' value='50000' />
-                    <label htmlFor="xlongRadius">50KM</label>
+                        <legend>Search Radius</legend>
+                        <div>
+                            <input onChange={radiusHandler} type="radio" id='shortRadius' name='radius' value='5000' required/>
+                            <label htmlFor="shortRadius">5KM</label>
+                            <input onChange={radiusHandler} type="radio" id='mediumRadius' name='radius' value='10000' />
+                            <label htmlFor="mediumRadius">10KM</label>
+                        </div>
+
+                        <div>
+                            <input onChange={radiusHandler} type="radio" id='longRadius' name='radius' value='25000' />
+                            <label htmlFor="longRadius">25KM</label>
+                            <input onChange={radiusHandler} type="radio" id='xlongRadius' name='radius' value='50000' />
+                            <label htmlFor="xlongRadius">50KM</label>
+                        </div>
                     </div>
                     
                     <div className="schoolTypeInputs">
-                    <legend>School Type</legend>
-                    <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' required/>
-                    <label htmlFor="university">University</label>
-                    <input onChange={schoolHandler} type="radio" id='college' name='schoolType' value='4bf58dd8d48988d1a2941735' />
-                    <label htmlFor="college">College</label>
-                    <input onChange={schoolHandler} type="radio" id='tradeSchool' name='schoolType' value='4bf58dd8d48988d1ad941735' />
-                    <label htmlFor="tradeSchool">Trade School</label>
+                        <legend>School Type</legend>
+                        <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' required/>
+                        <label htmlFor="university">University</label>
+                        <input onChange={schoolHandler} type="radio" id='college' name='schoolType' value='4bf58dd8d48988d1a2941735' />
+                        <label htmlFor="college">College</label>
+                        <div>
+                            <input onChange={schoolHandler} type="radio" id='tradeSchool' name='schoolType' value='4bf58dd8d48988d1ad941735' />
+                            <label htmlFor="tradeSchool">Trade School</label>
+                        </div>
                     </div>
-
-                    <button>Find Me Schools!</button>
+                    {this.renderRedirect()}
+                    <button onClick={this.setRedirect}>Find Schools!</button>
                     </div>
                 </form>
                 <nav>
