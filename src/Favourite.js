@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import firebase from './Firebase.js';
+import Swal from 'sweetalert2'
 
 class Favourite extends Component {
     constructor() {
@@ -13,6 +14,12 @@ class Favourite extends Component {
     removeSchool = (schoolRef) => {
         const dbFavouritesRef = firebase.database().ref('Favourites');
         dbFavouritesRef.child(schoolRef).remove();
+        Swal.fire({
+            title: "Institution Removed",
+            text: "Your favourite list has been updated",
+            icon: "success",
+            confirmButtonText: "Ok",
+        })
     }
 
     handleAddNotes = (schoolId) => {
@@ -21,6 +28,12 @@ class Favourite extends Component {
        this.setState({
            schoolNotes: ''
        })
+        Swal.fire({
+            title: "Note Added",
+            text: "Added",
+            icon: "success",
+            confirmButtonText: "Ok",
+        })
     }
 
    render() { 

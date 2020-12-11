@@ -36,23 +36,8 @@ class Favourites extends Component {
         })
     }
 
-    // removeSchool = (schoolRef) => {
-    //     const dbFavouritesRef = firebase.database().ref('Favourites');
-    //     dbFavouritesRef.child(schoolRef).remove();
-    // }
-
-    // handleAddNotes = (schoolId) => {
-    //     const dbFavouritesRef = firebase.database().ref('Favourites')
-    //     dbFavouritesRef.child(schoolId).update({schoolNotes: this.state.schoolNotes});
-    //     this.setState({
-    //         schoolNotes:''
-    //     })
-    //     document.querySelector('textarea').value = '';
-    // }
-
 
    render() { 
-       console.log(this.state.favourites);
        return (
            <Fragment>
                <div className="favorites">
@@ -60,22 +45,12 @@ class Favourites extends Component {
                <ul>
                {
                    this.state.favourites.map((school) => {
-                       console.log(school);
                        return(
-                           <>
-                           <Favourite 
-                           school={school}
-                           />
-                        {/* <li key={school.id}>
-                            <h3>{school.schoolName}</h3>
-                            <p>{school.schoolAddress}</p>
-                            <p><span>Notes: </span>{school.schoolNotes}</p>
-                            <label htmlFor="notes">Notes</label>
-                            <textarea name="notes" id="notes" onChange={(event) => this.setState({schoolNotes: event.target.value, schoolId: school.id})}></textarea>
-                            <button onClick={() => {this.handleAddNotes(school.id)}}>Add Notes</button>
-                            <button onClick={() => {this.removeSchool(school.id)} }>Remove School</button>
-                        </li> */}
-                        </>
+                        <Fragment>
+                            <Favourite 
+                            school={school}
+                            />
+                        </Fragment>
                        )
                    })
                }

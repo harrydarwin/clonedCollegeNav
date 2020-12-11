@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import firebase from './Firebase'
-// import AddSchool from './AddSchool'
 
 
 class Header extends Component{
@@ -21,7 +20,6 @@ class Header extends Component{
         dbRef.on('value', (data) => {
             const firebaseDataObj = data.val();
             const favouritesObject = firebaseDataObj.Favourites;
-            console.log(favouritesObject, "please work or i'll be sad");
             let newFavouriteArray = [];
             let favouriteSchool;
 
@@ -30,7 +28,6 @@ class Header extends Component{
                 newFavouriteArray.push(favouriteSchool);
             }
 
-            console.log(newFavouriteArray.length - 1);
             this.setState({
                 favouritesLength: newFavouriteArray.length - 1
             })
@@ -81,7 +78,6 @@ class Header extends Component{
                 </form>
                 <nav>
                     <ul>
-                        <li>USERNAME!!!!</li>
                         <li>
                             <NavLink activeClassName="active" exact to="/project6CollegeNavigator">Home</NavLink>
                         </li>
