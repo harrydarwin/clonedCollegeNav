@@ -38,30 +38,17 @@ class Header extends Component{
 
     setRedirect = () => {
         this.setState({
-<<<<<<< HEAD
-            redirect: true
-=======
             redirect:true
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
         })
     }
 
     renderRedirect = () => {
-<<<<<<< HEAD
-        if (this.state.redirect) {
-            return <Redirect to="/project6CollegeNavigator" />
-        }
-    }
-
-    render() {
-=======
         if(this.state.redirect) {
             return <Redirect to='project6CollegeNavigator' />
         }
     }
 
     render() {    
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
     const { schoolHandler, radiusHandler, handleCityInput, handleCountryInput, submitHandler } = this.props;
         return (
             <header>
@@ -106,14 +93,8 @@ class Header extends Component{
                             <label htmlFor="tradeSchool">Trade School</label>
                         </div>
                     </div>
-<<<<<<< HEAD
-
-                    {this.renderRedirect()}
-                    <button onClick={this.setRedirect}>Find Me Schools!</button>
-=======
                     {this.renderRedirect()}
                     <button onClick={this.setRedirect}>Find Schools!</button>
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
                     </div>
                 </form>
                 <nav>

@@ -86,23 +86,12 @@ class App extends Component {
      for (let schoolId in newSchoolObject) {
        userNewSchool = newSchoolObject[schoolId];
        userNewSchool.id = schoolId;
-<<<<<<< HEAD
-       //  userNewSchool.notes = this.state.schoolNotes
-       newSchoolArray.push(userNewSchool);
-     }
-     //4bf58dd8d48988d1ae941735-University
-     //  Community College- 4bf58dd8d48988d1a2941735
-     //  Trade School- 4bf58dd8d48988d1ad941735
-     let userSchoolType = '';
-     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735') {
-=======
 
        newSchoolArray.push(userNewSchool);
      }
 
      let userSchoolType= '';
      if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735'){
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
        userSchoolType = 'University'
      } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735') {
        userSchoolType = 'Community College'

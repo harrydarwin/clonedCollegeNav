@@ -498,9 +498,6 @@ footer {
   text-align: center;
   background-color: #416bff;
   font-weight: 500;
-<<<<<<< HEAD
-  padding: 10px 0;
-=======
   padding: 10px;
 }
 
@@ -515,7 +512,6 @@ footer a {
 footer a:hover,
 footer a:hover {
   border-bottom: 2px solid #073330;
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
 }
 
 /* hover Focus */
@@ -553,12 +549,7 @@ a:focus {
   }
 }
 
-<<<<<<< HEAD
-@media (max-width: 780px) {
-
-=======
 @media (max-width: 800px) {
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
   header {
     height: auto;
   }
@@ -600,10 +591,6 @@ a:focus {
 }
 
 @media (max-width: 480px) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
   h1 {
     font-size: 4rem;
   }
@@ -624,11 +611,7 @@ a:focus {
 
   .schoolResults {
     min-width: 300px;
-<<<<<<< HEAD
-    
-=======
     margin-bottom: 30px;
->>>>>>> 4eb820e4b6aec226be2f3342d9d6c802c3b197b6
   }
 
   .addedSchool .schoolResults {
