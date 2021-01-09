@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import firebase from './Firebase.js';
 import Swal from 'sweetalert2'
 
@@ -37,11 +37,6 @@ class SearchResults extends Component {
             confirmButtonText: "Ok",
         })
     }
-
-    // componentDidMount() {
-    //     console.log(this.sectionRef.current)
-    //     this.sectionRef.current.scrollIntoView();
-    // }
 
     handleAddFav = (name, address) => {
         const dbFavouritesRef = firebase.database().ref('Favourites')

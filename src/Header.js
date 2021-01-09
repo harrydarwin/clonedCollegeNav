@@ -44,6 +44,9 @@ class Header extends Component{
 
     renderRedirect = () => {
         if(this.state.redirect) {
+            this.setState({
+                redirect: false
+            })
             return <Redirect to='project6CollegeNavigator' />
         }
     }

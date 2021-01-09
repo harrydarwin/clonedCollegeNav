@@ -1,4 +1,4 @@
-import React, { Redirect, Component } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -55,7 +55,6 @@ class App extends Component {
       return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
     );
 
-    // this.props.schoolResults[0].location.formattedAddress
     
 
     this.setState({
