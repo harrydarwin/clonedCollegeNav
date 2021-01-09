@@ -104,8 +104,8 @@ class App extends Component {
       //  making inputs and comparison case sensitive
       const addedSchoolCity = object.schoolAddress[1].toLowerCase();
       const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
-
-      return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()));
+      
+      return ((object.schoolType === userSchoolType) && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase())) || ((object.schoolType === userSchoolType) && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCity.includes(this.state.cityInput.toLowerCase()))
     })
     );
   }
