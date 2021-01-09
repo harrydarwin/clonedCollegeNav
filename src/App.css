@@ -423,7 +423,7 @@ summary:focus {
   flex-direction: column;
   margin: 20px;
   border: 2px solid #b1bc2b;
-  width: 40%;
+  width: 700px;
   padding-left: 10px;
   background-color: white;
 }
@@ -534,6 +534,10 @@ a:focus {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
+  }
+
+  .favoritesFlex {
+    width: 80%;
   }
 
   .schoolResults {

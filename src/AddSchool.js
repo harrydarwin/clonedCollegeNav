@@ -29,7 +29,6 @@ class AddSchool extends Component {
         let schoolFormattedAddress = [this.state.schoolAddress.street, 
             this.state.schoolAddress.city + " " + this.state.schoolAddress.province + " " + this.state.schoolAddress.postalCode,
             this.state.schoolAddress.country ];
-        // console.log(schoolFormattedAddress, 'for');
         
         //make a referance to the database
         const dbRef = firebase.database().ref('NewSchools')
@@ -39,7 +38,6 @@ class AddSchool extends Component {
             schoolAddress: schoolFormattedAddress,
             schoolNote: this.state.schoolNote
         };
-        console.log(userNewSchool, 'newschool');
 
 
         dbRef.push(userNewSchool);
