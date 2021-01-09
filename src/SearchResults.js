@@ -64,8 +64,8 @@ class SearchResults extends Component {
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(
-                    <div className="schoolResults">
-                        <details key={schoolObj.id}>
+                    <div key={schoolObj.id} className="schoolResults">
+                        <details>
                             <summary>{schoolObj.name}</summary>
                                 <p>{schoolObj.location.formattedAddress.join(', ')}</p>
                         </details>
@@ -80,11 +80,11 @@ class SearchResults extends Component {
                 </div>
                 <div className="addedSchool">
                 <h2>User's Added Institutions</h2>
-                {
+                { 
                 this.props.schoolsAdded.map((newSchoolObj) => {
                     return(
-                    <div className="schoolResults">
-                        <details key={newSchoolObj.id}>
+                        <div key={newSchoolObj.id} className="schoolResults">
+                        <details>
                             <summary>{newSchoolObj.schoolName}</summary>
                                 <p>{newSchoolObj.schoolAddress.join(', ')}</p>
                         </details>

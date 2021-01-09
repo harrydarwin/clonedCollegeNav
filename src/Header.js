@@ -45,15 +45,9 @@ class Header extends Component{
     renderRedirect = () => {
         if(this.state.redirect) {
             this.setState({
-<<<<<<< HEAD
                 redirect: false
             })
             return <Redirect to='project6CollegeNavigator' />
-=======
-                redirect:false
-            })
-            return <Redirect to='/project6CollegeNavigator' />
->>>>>>> d9b5fb8dbe3fd4311cdc881e9ee2b78ff36bf62a
         }
     }
 
@@ -112,10 +106,10 @@ class Header extends Component{
                             <NavLink activeClassName="active" exact to="/project6CollegeNavigator">Home</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active" to="/project6CollegeNavigator/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
+                            <NavLink activeClassName="active" to="/favourites">Favourite Schools ({this.state.favouritesLength})</NavLink>
                         </li>
                         <li>
-                            <NavLink activeClassName="active" to="/project6CollegeNavigator/addSchool">Add School</NavLink>
+                            <NavLink activeClassName="active" to="/addSchool">Add School</NavLink>
                         </li>
                     </ul>
                 </nav>

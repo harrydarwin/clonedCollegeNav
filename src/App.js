@@ -35,87 +35,10 @@ class App extends Component {
 
 
  getData = () => {
-   axios({
-    method: 'GET',
-    responseType: 'json',
-    url: 'https://api.foursquare.com/v2/venues/search',
-    params: {
-      client_id:'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
-      client_secret:'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
-      near: this.state.cityInput + " " + this.state.countryInput,
-      categoryId:this.state.schoolTypeId,
-      radius:this.state.radius, //its in metres
-      v: 20201205
-            }
-  }).then((res) => {
-    const dataArray = res.data.response.venues;
-
-
-    const filteredArray = dataArray.filter((object => {
-      return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2})
-    );
-
-    
-
-    this.setState({
-      schoolResults: filteredArray,
-      isActive:true
-    })
-
-  }).catch ((err) => {
-    this.setState({
-      isActive:false
-    })
-    Swal.fire({
-      title: "No schools found",
-      text: "Please Try Another City and Province/Country",
-      icon: "error",
-      confirmButtonText: "Ok",
-    })
-  })
-
-   const dbRef = firebase.database().ref();
-   dbRef.on('value', (data) => {
-     const firebaseDataObj = data.val();
-     const newSchoolObject = firebaseDataObj.NewSchools;
-
-     let newSchoolArray = [];
-     let userNewSchool;
-
-     for (let schoolId in newSchoolObject) {
-       userNewSchool = newSchoolObject[schoolId];
-       userNewSchool.id = schoolId;
-
-       newSchoolArray.push(userNewSchool);
-     }
-
-     let userSchoolType= '';
-     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735'){
-       userSchoolType = 'University'
-     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735') {
-       userSchoolType = 'Community College'
-     } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735') {
-       userSchoolType = 'Trade School'
-     }
-
-     
-     const filteredNewSchoolArray = newSchoolArray.filter((object => {
-       
-      //  making inputs and comparison case sensitive
-       const addedSchoolCity = object.schoolAddress[1].toLowerCase();
-       const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
-
-       return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()))
-     })
-     );
-
-
-     this.setState({
-       newSchool: filteredNewSchoolArray
-     })
-   })
-   city = this.state.cityInput;
-   country = this.state.countryInput;
+  //Grab data from API
+   this.apiCall();
+  //Grab data from firebase
+   this.fireBaseCall();
  }
 
 
@@ -150,6 +73,95 @@ class App extends Component {
      countryInput: e.target.value
    })
  }
+
+  fireBaseCall() {
+    const dbRef = firebase.database().ref();
+    dbRef.on('value', (data) => {
+      const firebaseDataObj = data.val();
+      const newSchoolObject = firebaseDataObj.NewSchools;
+
+      // create and store usable, formatted firebase data 
+      let newSchoolArray = formatFirebaseData(newSchoolObject);
+      // convert and store API school type id (long alphanumeric string) to english school type for usable comparison
+      let userSchoolType = this.convertCategoryIdToName();
+
+      // filter firebase formatted school data by comparing school type with usr chosen school type and return results in an array
+      const filteredNewSchoolArray = this.compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType);
+
+      //store results in state
+      this.setState({
+        newSchool: filteredNewSchoolArray
+      });
+    });
+    // store in variables to pass as props
+    city = this.state.cityInput;
+    country = this.state.countryInput;
+  }
+
+  compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType) {
+    return newSchoolArray.filter((object => {
+
+      //  making inputs and comparison case sensitive
+      const addedSchoolCity = object.schoolAddress[1].toLowerCase();
+      const addedSchoolCountry = object.schoolAddress[2].toLowerCase();
+
+      return (object.schoolType === userSchoolType && addedSchoolCity.includes(this.state.cityInput.toLowerCase()) && addedSchoolCountry.includes(this.state.countryInput.toLowerCase()));
+    })
+    );
+  }
+
+  convertCategoryIdToName() {
+    let userSchoolType = '';
+    if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735') {
+      userSchoolType = 'University';
+    } else if (this.state.schoolTypeId === '4bf58dd8d48988d1a2941735') {
+      userSchoolType = 'Community College';
+    } else if (this.state.schoolTypeId === '4bf58dd8d48988d1ad941735') {
+      userSchoolType = 'Trade School';
+    }
+    return userSchoolType;
+  }
+
+  // API call function which draws data from the API and handles errors if data is not found 
+  apiCall() {
+    axios({
+      method: 'GET',
+      responseType: 'json',
+      url: 'https://api.foursquare.com/v2/venues/search',
+      params: {
+        client_id: 'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
+        client_secret: 'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
+        near: this.state.cityInput + " " + this.state.countryInput,
+        categoryId: this.state.schoolTypeId,
+        radius: this.state.radius,
+        v: 20201205
+      }
+    }).then((res) => {
+      const dataArray = res.data.response.venues;
+
+
+      const filteredArray = ourCategoryFilter(dataArray);
+
+
+
+      this.setState({
+        schoolResults: filteredArray,
+        isActive: true
+      });
+
+    }).catch((err) => {
+      this.setState({
+        isActive: false
+      });
+      Swal.fire({
+        title: "No schools found",
+        text: "Please Try Another City and Province/Country",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    });
+  }
+
 
 
 
@@ -192,3 +204,28 @@ class App extends Component {
 
 
 export default App;
+
+
+
+// Formats user input schools from firebase into identical objects with ID's and pushes formatted objects to new array
+function formatFirebaseData(newSchoolObject) {
+  let newSchoolArray = [];
+  let userNewSchool;
+
+  for (let schoolId in newSchoolObject) {
+    userNewSchool = newSchoolObject[schoolId];
+    userNewSchool.id = schoolId;
+
+    newSchoolArray.push(userNewSchool);
+  }
+  return newSchoolArray;
+}
+
+// Function to filter our data by category type matching the user selection - ie: university, college or trade school 
+function ourCategoryFilter(dataArray) {
+  return dataArray.filter((object => {
+    return object.name.includes("University") || object.categories[0].name === "Community College" || object.categories[0].name === "Trade School" && object.location.formattedAddress.length > 2;
+  })
+  );
+}
+

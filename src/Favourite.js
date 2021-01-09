@@ -40,7 +40,7 @@ class Favourite extends Component {
        const {id, schoolName, schoolAddress, schoolNotes} = this.props.school;
        return (
            <>
-           <li key={id}>
+           {/* <li key={id}>
                <h3>{schoolName}</h3>
                <p>{schoolAddress}</p>
                <p><span>Notes: </span>{schoolNotes}</p>
@@ -49,7 +49,7 @@ class Favourite extends Component {
                <button onClick={() => { this.handleAddNotes(id) }}>Add Notes</button>
                <button onClick>Edit Notes</button>
                <button onClick={() => { this.removeSchool(id) }}>Remove School</button>
-           </li>
+           </li> */}
        
            
            <li key={id} className="favoritesFlex">
