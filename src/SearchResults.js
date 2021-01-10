@@ -60,7 +60,7 @@ class SearchResults extends Component {
             <section>
                 <div className="combinedSchools">
                 <div className="searchedSchools">
-                <h2 ref={this.sectionRef}>Search results: <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
+                <h2 name="scroll-to-element" ref={this.sectionRef}>Search results: <span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
                 {
                 this.props.schoolResults.map((schoolObj) => {
                     return(

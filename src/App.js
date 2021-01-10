@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
+// adding react scroll library
+import { animateScroll as scroller } from "react-scroll";
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import firebase from './Firebase.js';
@@ -33,12 +35,22 @@ class App extends Component {
     }
   }
 
+// scroll to element function
+ scrollTo() {
+    scroller.scrollTo('scroll-to-element', {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart'
+    })
+  }
 
  getData = () => {
   //Grab data from API
    this.apiCall();
   //Grab data from firebase
    this.fireBaseCall();
+  //  scrolls to search results when API call is made
+  this.scrollTo();
  }
 
 
