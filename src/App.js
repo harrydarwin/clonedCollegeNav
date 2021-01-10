@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 // adding react scroll library
-import { animateScroll as scroller } from "react-scroll";
+import { animateScroll as scroll, scroller } from "react-scroll";
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import firebase from './Firebase.js';
@@ -190,7 +190,7 @@ class App extends Component {
         />
         <div className="wrapper">
         {this.state.isActive 
-            ? <Route exact path="/project6CollegeNavigator" render={() => {
+            ? <Route exact path="/searchResults" render={() => {
           return (
             <>
             <SearchResults 
@@ -205,8 +205,8 @@ class App extends Component {
          }/>  : null 
       } 
 
-        <Route path="/project6CollegeNavigator/addSchool" component={AddSchool} /> 
-        <Route path="/project6CollegeNavigator/favourites" component={Favourites} /> 
+        <Route path="/addSchool" component={AddSchool} /> 
+        <Route path="/favourites" component={Favourites} /> 
         </div>
         <Footer />
       </Router>
