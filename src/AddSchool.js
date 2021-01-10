@@ -80,21 +80,21 @@ class AddSchool extends Component {
                             onChange={(event) => this.setState({ schoolName: event.target.value })} /><br />
                         <div className="schoolTypeInputs">
                             <legend>School Type</legend>
-                            <input type="radio" id='university' name='schoolType'
+                            <input type="radio" id='newUniversity' name='schoolType'
                                 value='University' required
                                 checked={this.state.schoolType === "University"}
                                 onChange={(event) => this.setState({ schoolType: event.target.value })} />
-                            <label htmlFor="university">University</label>
-                            <input type="radio" id='college' name='schoolType'
+                            <label htmlFor="newUniversity">University</label>
+                            <input type="radio" id='newCollege' name='schoolType'
                                 value='Community College'
                                 checked={this.state.schoolType === "Community College"}
                                 onChange={(event) => this.setState({ schoolType: event.target.value })} />
-                            <label htmlFor="college">College</label>
-                            <input type="radio" id='tradeSchool' name='schoolType'
+                            <label htmlFor="newCollege">College</label>
+                            <input type="radio" id='newTradeSchool' name='schoolType'
                                 value='Trade School'
                                 checked={this.state.schoolType === "Trade School"}
                                 onChange={(event) => this.setState({ schoolType: event.target.value })} />
-                            <label htmlFor="tradeSchool">Trade School</label><br />
+                            <label htmlFor="newTradeSchool">Trade School</label><br />
                         </div>
                         <div className="addressInputs">
                             <div className="addressInput">
