@@ -47,7 +47,7 @@ class Header extends Component{
             this.setState({
                 redirect: false
             })
-            return <Redirect to='project6CollegeNavigator' />
+            return <Redirect exact to="/project6CollegeNavigator" />
         }
     }
 
