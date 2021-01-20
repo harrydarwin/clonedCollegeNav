@@ -39,7 +39,6 @@ class SearchResults extends Component {
 
         //for each set of coordinates do this and pass coodrinates to setlnglat
         this.props.mapPoints.forEach(point => {
-            console.log(point)
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4>`))
@@ -70,14 +69,13 @@ class SearchResults extends Component {
         });
 
         this.props.mapPoints.forEach(point => {
-            console.log(point)
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4>`))
                 .addTo(map);
 
             let popup = new mapboxgl.Popup({ offset: 25 });
-
+           
         })
     }
     

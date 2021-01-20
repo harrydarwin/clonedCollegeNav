@@ -120,7 +120,6 @@ class App extends Component {
         const address = school.schoolAddress.join();
         mapSearches.push(address);
       })
-      console.log({mapSearches});
       //store results in state
       this.setState({
         newSchool: filteredNewSchoolArray
@@ -147,7 +146,6 @@ class App extends Component {
     this.setState({
       locationCoordinates: ourLocation
     })
-   console.log({ourLocation})
   });
   }
 
@@ -194,12 +192,9 @@ class App extends Component {
 
       const filteredArray = ourCategoryFilter(dataArray);
       longLats = [];
-      console.log({filteredArray})
       filteredArray.forEach(school => {
         longLats.push(school)
       })
-
-      console.log({longLats});
 
       this.setState({
         schoolResults: filteredArray,
