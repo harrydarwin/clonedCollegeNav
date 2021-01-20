@@ -5,6 +5,7 @@ import { animateScroll as scroll, scroller } from "react-scroll";
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import firebase from './Firebase.js';
+import mapboxgl from 'mapbox-gl';
 import Header from './Header.js';
 import SearchResults from './SearchResults.js';
 import './App.css';
@@ -15,6 +16,11 @@ import Footer from './Footer.js';
 
 let city = "";
 let country = "";
+let mapSearches = [];
+let longLats = [];
+
+const testArray = ['1234 Yonge Street, Toronto, Ontario M4T 1W2, Canada', '424 Yonge Street, Suite 200, Toronto ON M5B 2H4, Canada', '487 Adelaide St W, Unit 100 (Portland), Toronto ON, Canada'];
+mapboxgl.accessToken = `pk.eyJ1IjoiaGFycnlndWxvaWVuIiwiYSI6ImNrazQ2bmFuYTE2c2MydnBiZW5mcDVnaHYifQ.QPjai4qdHOKRY8qHYt1QVw`;
 
 class App extends Component {
   constructor() {
@@ -31,7 +37,10 @@ class App extends Component {
       newSchool: [],
       favouriteLength: '',
       isActive: false,
-      directMeHome: false
+      directMeHome: false,
+      mapLocations: [],
+      longLatLocations: [],
+      locationCoordinates: [],
     }
   }
 
@@ -44,6 +53,8 @@ class App extends Component {
     })
   }
 
+  
+
  getData = () => {
   //Grab data from API
    this.apiCall();
@@ -51,7 +62,13 @@ class App extends Component {
    this.fireBaseCall();
   //  scrolls to search results when API call is made
   this.scrollTo();
+  
+  // testArray.forEach(school => this.mapData(school));
+  this.mapData(`${this.state.cityInput} ${this.state.countryInput}`)
+   
  }
+
+
 
 
  handleSubmit = (e) => {
@@ -99,7 +116,11 @@ class App extends Component {
 
       // filter firebase formatted school data by comparing school type with usr chosen school type and return results in an array
       const filteredNewSchoolArray = this.compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType);
-
+      filteredNewSchoolArray.forEach(school => {
+        const address = school.schoolAddress.join();
+        mapSearches.push(address);
+      })
+      console.log({mapSearches});
       //store results in state
       this.setState({
         newSchool: filteredNewSchoolArray
@@ -108,6 +129,26 @@ class App extends Component {
     // store in variables to pass as props
     city = this.state.cityInput;
     country = this.state.countryInput;
+  }
+
+  mapData(query) {
+    axios({
+      method: 'GET',
+      responseType: 'json',
+      url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?`,
+      params: {
+        access_token: mapboxgl.accessToken,
+        
+      }
+    }).then((res) => {
+    const possibleLocations = res.data.features;
+
+    const ourLocation = possibleLocations[0].geometry.coordinates;
+    this.setState({
+      locationCoordinates: ourLocation
+    })
+   console.log({ourLocation})
+  });
   }
 
   compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType) {
@@ -151,10 +192,14 @@ class App extends Component {
     }).then((res) => {
       const dataArray = res.data.response.venues;
 
-
       const filteredArray = ourCategoryFilter(dataArray);
+      longLats = [];
+      console.log({filteredArray})
+      filteredArray.forEach(school => {
+        longLats.push(school)
+      })
 
-
+      console.log({longLats});
 
       this.setState({
         schoolResults: filteredArray,
@@ -198,6 +243,8 @@ class App extends Component {
               schoolsAdded = {this.state.newSchool}
               userCityInput = {city}
               userCountryInput = {country}
+              location = {this.state.locationCoordinates}
+              mapPoints = {longLats}
               />
             </>
           )
