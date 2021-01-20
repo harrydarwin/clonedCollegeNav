@@ -61,14 +61,25 @@ class SearchResults extends Component {
         });
     }
     
-    // componentDidUpdate() {
-    //     let map = new mapboxgl.Map({
-    //         container: this.mapContainer,
-    //         style: 'mapbox://styles/mapbox/streets-v11',
-    //         center: [this.props.location[0], this.props.location[1]],
-    //         zoom: 11
-    //     });
-    // }
+    componentDidUpdate() {
+        let map = new mapboxgl.Map({
+            container: this.mapContainer,
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [this.props.location[0], this.props.location[1]],
+            zoom: 11
+        });
+
+        this.props.mapPoints.forEach(point => {
+            console.log(point)
+            let marker = new mapboxgl.Marker()
+                .setLngLat([point.location.lng, point.location.lat])
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4>`))
+                .addTo(map);
+
+            let popup = new mapboxgl.Popup({ offset: 25 });
+
+        })
+    }
     
 
 
