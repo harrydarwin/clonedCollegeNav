@@ -43,15 +43,24 @@ class SearchResults extends Component {
 
         //for each set of coordinates do this and pass coodrinates to setlnglat
         this.props.mapPoints.forEach(point => {
+            console.log(point)
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4>`))
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
                 .addTo(map);
 
             let popup = new mapboxgl.Popup({ offset: 25 });
            
         })
 
+        this.props.schoolsAdded.forEach(point => {
+            let marker = new mapboxgl.Marker()
+                .setLngLat([point.coordinates[0], point.coordinates[1]])
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>` ))
+                .addTo(map);
+
+            let popup = new mapboxgl.Popup({ offset: 25 });
+        })
 
 
 
@@ -62,6 +71,9 @@ class SearchResults extends Component {
                 zoom: map.getZoom().toFixed(2)
             });
         });
+
+    
+
     }
     
     componentDidUpdate() {
@@ -75,11 +87,19 @@ class SearchResults extends Component {
         this.props.mapPoints.forEach(point => {
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4>`))
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
                 .addTo(map);
 
             let popup = new mapboxgl.Popup({ offset: 25 });
-           
+        })
+
+        this.props.schoolsAdded.forEach(point => {
+            let marker = new mapboxgl.Marker()
+                .setLngLat([point.coordinates[0], point.coordinates[1]])
+                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>`))
+                .addTo(map);
+
+            let popup = new mapboxgl.Popup({ offset: 25 });
         })
     }
     

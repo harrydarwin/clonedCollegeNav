@@ -116,10 +116,11 @@ class App extends Component {
 
       // filter firebase formatted school data by comparing school type with usr chosen school type and return results in an array
       const filteredNewSchoolArray = this.compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType);
+      mapSearches = [];
       filteredNewSchoolArray.forEach(school => {
-        const address = school.schoolAddress.join();
-        mapSearches.push(address);
+        this.userSchoolMapData(school);
       })
+      console.log(mapSearches)
       //store results in state
       this.setState({
         newSchool: filteredNewSchoolArray
@@ -130,6 +131,31 @@ class App extends Component {
     country = this.state.countryInput;
   }
 
+  userSchoolMapData(query) {
+    let eachSchool = query;
+    eachSchool.address = query.schoolAddress.join();
+
+    axios({
+      method: 'GET',
+      responseType: 'json',
+      url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${eachSchool.address}.json?`,
+      params: {
+        access_token: mapboxgl.accessToken,
+
+      }
+    }).then((res) => {
+      eachSchool.coordinates =  res.data.features[0].center;
+      // console.log(customSchools)
+      // return customSchools;
+
+      mapSearches.push(eachSchool);
+    });
+
+  }
+  
+
+
+// Grab coordinates of current location
   mapData(query) {
     axios({
       method: 'GET',
@@ -192,14 +218,16 @@ class App extends Component {
 
       const filteredArray = ourCategoryFilter(dataArray);
       longLats = [];
-      filteredArray.forEach(school => {
-        longLats.push(school)
-      })
-
-      this.setState({
-        schoolResults: filteredArray,
-        isActive: true
-      });
+      if(filteredArray) {
+        filteredArray.forEach(school => {
+          longLats.push(school)
+        })
+  
+        this.setState({
+          schoolResults: filteredArray,
+          isActive: true
+        });
+      }
 
     }).catch((err) => {
       this.setState({
@@ -240,6 +268,7 @@ class App extends Component {
               userCountryInput = {country}
               location = {this.state.locationCoordinates}
               mapPoints = {longLats}
+              schoolsAdded = {mapSearches}
               />
             </>
           )
