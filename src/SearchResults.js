@@ -3,6 +3,7 @@ import firebase from './Firebase.js';
 import Swal from 'sweetalert2';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
+import { Redirect } from 'react-router-dom';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -41,15 +42,18 @@ class SearchResults extends Component {
             zoom: 11
         });
 
+
         //for each set of coordinates do this and pass coodrinates to setlnglat
         this.props.mapPoints.forEach(point => {
             console.log(point)
-            let marker = new mapboxgl.Marker()
+            const marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
                 .addTo(map);
 
-            let popup = new mapboxgl.Popup({ offset: 25 });
+            const markerDiv = marker.getElement();
+            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
            
         })
 
@@ -59,7 +63,9 @@ class SearchResults extends Component {
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>` ))
                 .addTo(map);
 
-            let popup = new mapboxgl.Popup({ offset: 25 });
+            const markerDiv = marker.getElement();
+            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
         })
 
 
@@ -84,13 +90,19 @@ class SearchResults extends Component {
             zoom: 11
         });
 
+
         this.props.mapPoints.forEach(point => {
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.location.lng, point.location.lat])
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
                 .addTo(map);
 
-            let popup = new mapboxgl.Popup({ offset: 25 });
+            const markerDiv = marker.getElement();
+            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+            
+           
+
         })
 
         this.props.schoolsAdded.forEach(point => {
@@ -99,8 +111,12 @@ class SearchResults extends Component {
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>`))
                 .addTo(map);
 
-            let popup = new mapboxgl.Popup({ offset: 25 });
+            const markerDiv = marker.getElement();
+            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+
         })
+
     }
     
 

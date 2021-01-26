@@ -120,7 +120,7 @@ class App extends Component {
       filteredNewSchoolArray.forEach(school => {
         this.userSchoolMapData(school);
       })
-      console.log(mapSearches)
+
       //store results in state
       this.setState({
         newSchool: filteredNewSchoolArray
@@ -135,45 +135,59 @@ class App extends Component {
     let eachSchool = query;
     eachSchool.address = query.schoolAddress.join();
 
-    axios({
-      method: 'GET',
-      responseType: 'json',
-      url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${eachSchool.address}.json?`,
-      params: {
-        access_token: mapboxgl.accessToken,
-
-      }
-    }).then((res) => {
-      eachSchool.coordinates =  res.data.features[0].center;
-      // console.log(customSchools)
-      // return customSchools;
-
-      mapSearches.push(eachSchool);
-    });
+    this.geoCodeCall(eachSchool.address)
+      .then((res) => {
+        eachSchool.coordinates =  res.data.features[0].center;
+        mapSearches.push(eachSchool);
+      }).catch((err) => {
+        this.setState({
+          isActive: false
+        });
+        Swal.fire({
+          title: "Please Try Again",
+          text: "We are experiencing technical difficulties",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });
+      
 
   }
-  
 
-
-// Grab coordinates of current location
+  // Grab coordinates of current location
   mapData(query) {
-    axios({
+    this.geoCodeCall(query)
+      .then((res) => {
+        const possibleLocations = res.data.features;
+
+        const ourLocation = possibleLocations[0].geometry.coordinates;
+        this.setState({
+          locationCoordinates: ourLocation
+        })
+      }).catch((err) => {
+        
+        Swal.fire({
+          title: "Issue with request",
+          text: "Please check you location and try again",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      });;
+  }
+
+
+  geoCodeCall(query) {
+    return axios({
       method: 'GET',
       responseType: 'json',
       url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?`,
       params: {
         access_token: mapboxgl.accessToken,
-        
       }
-    }).then((res) => {
-    const possibleLocations = res.data.features;
-
-    const ourLocation = possibleLocations[0].geometry.coordinates;
-    this.setState({
-      locationCoordinates: ourLocation
-    })
-  });
+    });
   }
+
+
 
   compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType) {
     return newSchoolArray.filter((object => {
