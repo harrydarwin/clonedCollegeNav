@@ -459,6 +459,7 @@ summary:focus {
   position: absolute;
   height: 100%;
   width: 100%;
+  max-height: 800px;
   /* top: 0;
   right: 0;
   left: 0;

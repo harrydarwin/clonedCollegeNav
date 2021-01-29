@@ -34,49 +34,77 @@ class SearchResults extends Component {
 
     componentDidMount() {
         this.sectionRef.current.scrollIntoView();
-
         let map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v11',
             center: [this.props.location[0], this.props.location[1]],
             zoom: 11
         });
+        // let tradeLayer = [];
+        // let uniLayer = [];
+        // let CollegeLayer = [];
+        // this.props.mapPoints.forEach(point => {
 
+        //     const pointMarker =  {"geojson-marker": {
+        //             "type": "geojson",
+        //             "data": {
+        //                 "type": "Feature",
+        //                 "geometry": {
+        //                     "type": "Point",
+        //                     "coordinates": [point.location.lng, point.location.lat]
+        //                 },
+        //                 "properties": {
+        //                     "title": point.name,
+        //                     // "marker-symbol": appointedMarker,
+        //                     // "schoolType": schoolType
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     console.timeLog(pointMarker);
+        // })
+        
 
-        //for each set of coordinates do this and pass coodrinates to setlnglat
-        this.props.mapPoints.forEach(point => {
-            console.log(point)
-            const marker = new mapboxgl.Marker()
-                .setLngLat([point.location.lng, point.location.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
-                .addTo(map);
-
-            const markerDiv = marker.getElement();
-            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
-            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-           
-        })
-
-        this.props.schoolsAdded.forEach(point => {
-            let marker = new mapboxgl.Marker()
-                .setLngLat([point.coordinates[0], point.coordinates[1]])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>` ))
-                .addTo(map);
-
-            const markerDiv = marker.getElement();
-            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
-            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-        })
-
-
-
-        map.on('move', () => {
-            this.setState({
-                lng: map.getCenter().lng.toFixed(4),
-                lat: map.getCenter().lat.toFixed(4),
-                zoom: map.getZoom().toFixed(2)
+        map.on('load', () => {
+            if(this.props.schoolResults) {
+                //for each set of coordinates do this and pass coodrinates to setlnglat
+                this.props.schoolResults.forEach(point => {
+                
+                    console.log(point)
+                    const marker = new mapboxgl.Marker({
+                        color: point.markerColor
+                    })  .setLngLat([point.location.lng, point.location.lat])
+                        .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
+                        .addTo(map);
+        
+                    const markerDiv = marker.getElement();
+                    markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+                    markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+                
+                })
+            }
+            console.log("if statement")
+            this.props.schoolsAdded.forEach(point => {
+                let marker = new mapboxgl.Marker()
+                    .setLngLat([point.coordinates[0], point.coordinates[1]])
+                    .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>` ))
+                    .addTo(map);
+    
+                const markerDiv = marker.getElement();
+                markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+                markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+            })
+    
+    
+    
+            map.on('move', () => {
+                this.setState({
+                    lng: map.getCenter().lng.toFixed(4),
+                    lat: map.getCenter().lat.toFixed(4),
+                    zoom: map.getZoom().toFixed(2)
+                });
             });
-        });
+        })
 
     
 
@@ -90,10 +118,11 @@ class SearchResults extends Component {
             zoom: 11
         });
 
-
-        this.props.mapPoints.forEach(point => {
-            let marker = new mapboxgl.Marker()
-                .setLngLat([point.location.lng, point.location.lat])
+        if (this.props.schoolResults) {
+        this.props.schoolResults.forEach(point => {
+            let marker = new mapboxgl.Marker({
+                color: point.markerColor
+            })  .setLngLat([point.location.lng, point.location.lat])
                 .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
                 .addTo(map);
 
@@ -104,7 +133,7 @@ class SearchResults extends Component {
            
 
         })
-
+    }
         this.props.schoolsAdded.forEach(point => {
             let marker = new mapboxgl.Marker()
                 .setLngLat([point.coordinates[0], point.coordinates[1]])
@@ -175,6 +204,8 @@ class SearchResults extends Component {
                                 })
                             }
                         </div>
+                        {
+                            this.props.schoolResults ?
                             <div className="searchedSchools">
                                 <h2>Search Results</h2>
                                 {
@@ -188,12 +219,13 @@ class SearchResults extends Component {
                                                 <button
                                                     onClick={() => { this.handleAddFav(schoolObj.name, schoolObj.location.formattedAddress) }}
                                                 >favourite
-                            </button>
+                                                </button>
                                             </div>
                                         )
                                     })
                                 }
                             </div>
+                        : <h2>Server issues: Could only return user added schools.</h2> }
                     </div>
                     </div>
                     <div className="mapHeading">

@@ -68,9 +68,6 @@ class App extends Component {
    
  }
 
-
-
-
  handleSubmit = (e) => {
    e.preventDefault();
    this.getData();
@@ -120,7 +117,7 @@ class App extends Component {
       filteredNewSchoolArray.forEach(school => {
         this.userSchoolMapData(school);
       })
-
+      
       //store results in state
       this.setState({
         newSchool: filteredNewSchoolArray
@@ -140,8 +137,9 @@ class App extends Component {
         eachSchool.coordinates =  res.data.features[0].center;
         mapSearches.push(eachSchool);
       }).catch((err) => {
+        
         this.setState({
-          isActive: false
+          isActive: false,
         });
         Swal.fire({
           title: "Please Try Again",
@@ -161,6 +159,7 @@ class App extends Component {
         const possibleLocations = res.data.features;
 
         const ourLocation = possibleLocations[0].geometry.coordinates;
+        
         this.setState({
           locationCoordinates: ourLocation
         })
@@ -215,6 +214,7 @@ class App extends Component {
 
   // API call function which draws data from the API and handles errors if data is not found 
   apiCall() {
+    // longLats = [];
     axios({
       method: 'GET',
       responseType: 'json',
@@ -231,28 +231,53 @@ class App extends Component {
       const dataArray = res.data.response.venues;
 
       const filteredArray = ourCategoryFilter(dataArray);
-      longLats = [];
-      if(filteredArray) {
-        filteredArray.forEach(school => {
-          longLats.push(school)
-        })
-  
+
+      //assign a markerColor to each school object based on its type
+      colorPicker(filteredArray);
+      // if(filteredArray) {
+      //   filteredArray.forEach(school => {
+      //     longLats.push(school)
+      //   })
+      console.log(filteredArray)
         this.setState({
           schoolResults: filteredArray,
           isActive: true
         });
-      }
+        // console.log(filteredArray, longLats)
+      // }
 
     }).catch((err) => {
-      this.setState({
-        isActive: false
-      });
-      Swal.fire({
-        title: "No schools found",
-        text: "Please Try Another City and Province/Country",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
+      
+      
+      if (err == "Error: Request failed with status code 403"){
+        this.setState({
+          isActive: true,
+          schoolResults: false
+        });
+      
+        // this.fireBaseCall();
+        // //  scrolls to search results when API call is made
+        // this.scrollTo();
+
+        // // testArray.forEach(school => this.mapData(school));
+        // this.mapData(`${this.state.cityInput} ${this.state.countryInput}`)
+        // Swal.fire({
+        //   title: "Technical Difficulties",
+        //   text: "Please Try Another City and Province/Country",
+        //   icon: "error",
+        //   confirmButtonText: "Ok",
+        // });
+    } else {
+        this.setState({
+          isActive: false,
+        });
+        Swal.fire({
+          title: "No Schools Found",
+          text: "Please Try Another City and Province/Country",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+    }
     });
   }
 
@@ -281,7 +306,7 @@ class App extends Component {
               userCityInput = {city}
               userCountryInput = {country}
               location = {this.state.locationCoordinates}
-              mapPoints = {longLats}
+              // mapPoints = {longLats}
               schoolsAdded = {mapSearches}
               />
             </>
@@ -326,3 +351,13 @@ function ourCategoryFilter(dataArray) {
   );
 }
 
+function colorPicker(array) {
+
+  array.forEach(object => {
+    console.log(object.categories[0].name)
+    if (object.name.includes("University")) { object.markerColor = "#7261a3" }
+    else if (object.categories[0].name == "Community College") { object.markerColor = "#5ca4a9" }
+    else if (object.categories[0].name == "Trade School") { object.markerColor = "#e6af2e" }
+    else { object.markerColor = "#EDD2E0" }
+  })
+}
