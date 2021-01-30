@@ -19,6 +19,8 @@ class SearchResults extends Component {
             savedSchool: {
                 schoolName: '',
                 schoolAddress: [],
+                map: false,
+                currentCoordinates: []
             },
             lng: 5,
             lat: 34,
@@ -26,6 +28,7 @@ class SearchResults extends Component {
         }
 
         this.sectionRef = React.createRef();
+        
     }
 
 
@@ -33,6 +36,8 @@ class SearchResults extends Component {
 
 
     componentDidMount() {
+        let coordinates = [];
+
         this.sectionRef.current.scrollIntoView();
         let map = new mapboxgl.Map({
             container: this.mapContainer,
@@ -70,7 +75,7 @@ class SearchResults extends Component {
                 //for each set of coordinates do this and pass coodrinates to setlnglat
                 this.props.schoolResults.forEach(point => {
                 
-                    console.log(point)
+                    // console.log(point)
                     const marker = new mapboxgl.Marker({
                         color: point.markerColor
                     })  .setLngLat([point.location.lng, point.location.lat])
@@ -80,7 +85,25 @@ class SearchResults extends Component {
                     const markerDiv = marker.getElement();
                     markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
                     markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-                
+                    markerDiv.style.cursor="pointer";
+                    markerDiv.addEventListener('click', (e) => {
+                        for(let coord in marker._lngLat){
+                            coordinates.push(marker._lngLat[coord]);
+                        }
+
+                        this.setState({
+                            map: true,
+                            currentCoordinates: coordinates
+                        })
+                        
+                      
+                        map.flyTo({
+                            center: this.state.currentCoordinates
+                        })
+                        // console.log(e, marker._lngLat)
+                    })
+
+
                 })
             }
             console.log("if statement")
@@ -93,6 +116,23 @@ class SearchResults extends Component {
                 const markerDiv = marker.getElement();
                 markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
                 markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+                markerDiv.style.cursor = "pointer";
+                markerDiv.addEventListener('click', (e) => {
+                    for (let coord in marker._lngLat) {
+                        coordinates.push(marker._lngLat[coord]);
+                    }
+
+                    this.setState({
+                        map: true,
+                        currentCoordinates: coordinates
+                    })
+
+
+                    map.flyTo({
+                        center: this.state.currentCoordinates
+                    })
+                    // console.log(e, marker._lngLat)
+                })
             })
     
     
@@ -111,12 +151,24 @@ class SearchResults extends Component {
     }
     
     componentDidUpdate() {
-        let map = new mapboxgl.Map({
-            container: this.mapContainer,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.props.location[0], this.props.location[1]],
-            zoom: 11
-        });
+        let map;
+        let coordinates = [];
+        if(this.state.map === false) {
+
+            map = new mapboxgl.Map({
+                container: this.mapContainer,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [this.props.location[0], this.props.location[1]],
+                zoom: 11
+            });
+        } else {
+            map = new mapboxgl.Map({
+                container: this.mapContainer,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: this.state.currentCoordinates,
+                zoom: 11
+            });
+        }
 
         if (this.props.schoolResults) {
         this.props.schoolResults.forEach(point => {
@@ -129,7 +181,23 @@ class SearchResults extends Component {
             const markerDiv = marker.getElement();
             markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
             markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-            
+            markerDiv.style.cursor = "pointer";
+            markerDiv.addEventListener('click', (e) => {
+                for (let coord in marker._lngLat) {
+                    coordinates.push(marker._lngLat[coord]);
+                }
+
+                this.setState({
+                    map: true,
+                    currentCoordinates: coordinates
+                })
+
+
+                map.flyTo({
+                    center: this.state.currentCoordinates
+                })
+                // console.log(e, marker._lngLat)
+            })
            
 
         })
@@ -143,7 +211,23 @@ class SearchResults extends Component {
             const markerDiv = marker.getElement();
             markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
             markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+            markerDiv.style.cursor = "pointer";
+            markerDiv.addEventListener('click', (e) => {
+                for (let coord in marker._lngLat) {
+                    coordinates.push(marker._lngLat[coord]);
+                }
 
+                this.setState({
+                    map: true,
+                    currentCoordinates: coordinates
+                })
+
+
+                map.flyTo({
+                    center: this.state.currentCoordinates
+                })
+                // console.log(e, marker._lngLat)
+            })
         })
 
     }
