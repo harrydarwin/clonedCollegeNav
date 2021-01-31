@@ -17,9 +17,7 @@ import Footer from './Footer.js';
 let city = "";
 let country = "";
 let mapSearches = [];
-let longLats = [];
 
-const testArray = ['1234 Yonge Street, Toronto, Ontario M4T 1W2, Canada', '424 Yonge Street, Suite 200, Toronto ON M5B 2H4, Canada', '487 Adelaide St W, Unit 100 (Portland), Toronto ON, Canada'];
 mapboxgl.accessToken = `pk.eyJ1IjoiaGFycnlndWxvaWVuIiwiYSI6ImNrazQ2bmFuYTE2c2MydnBiZW5mcDVnaHYifQ.QPjai4qdHOKRY8qHYt1QVw`;
 
 class App extends Component {

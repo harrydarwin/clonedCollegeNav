@@ -20,8 +20,8 @@ class SearchResults extends Component {
                 schoolName: '',
                 schoolAddress: [],
                 map: false,
-                currentCoordinates: []
             },
+            currentCoordinates: [],
             lng: 5,
             lat: 34,
             zoom: 2
@@ -42,31 +42,38 @@ class SearchResults extends Component {
         let map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.props.location[0], this.props.location[1]],
+            center: this.props.location,
             zoom: 11
         });
-        // let tradeLayer = [];
-        // let uniLayer = [];
-        // let CollegeLayer = [];
-        // this.props.mapPoints.forEach(point => {
-
-        //     const pointMarker =  {"geojson-marker": {
-        //             "type": "geojson",
-        //             "data": {
-        //                 "type": "Feature",
-        //                 "geometry": {
-        //                     "type": "Point",
-        //                     "coordinates": [point.location.lng, point.location.lat]
-        //                 },
-        //                 "properties": {
-        //                     "title": point.name,
-        //                     // "marker-symbol": appointedMarker,
-        //                     // "schoolType": schoolType
-        //                 }
+        // let places = {
+        //     'type': 'FeatureCollection',
+        //     'features': [
+        //         {
+        //             'type': 'Feature',
+        //             'properties': {
+        //                 'icon': 'theatre'
+        //             },
+        //             'geometry': {
+        //                 'type': 'Point',
+        //                 'coordinates': [-77.038659, 38.931567]
         //             }
+        //         }]
+        // }
+
+        // this.props.schoolResults.forEach(point => {
+        //     let school = {
+        //         'type': 'Feature',
+        //         'properties': {
+        //             'name': point.name,
+        //             'markerColor': point.markerColor,
+        //             'schoolType': point.categories[0].name
+        //         },
+        //         'geometry': {
+        //             'type': 'point',
+        //             'coordinates': [point.location.lng, point.location.lat]
         //         }
         //     }
-        //     console.timeLog(pointMarker);
+        //     places.features.push(school)
         // })
         
 
@@ -92,8 +99,7 @@ class SearchResults extends Component {
                         }
 
                         this.setState({
-                            map: true,
-                            currentCoordinates: coordinates
+                            currentCoordinates: coordinates,
                         })
                         
                       
@@ -123,8 +129,8 @@ class SearchResults extends Component {
                     }
 
                     this.setState({
-                        map: true,
                         currentCoordinates: coordinates
+                    
                     })
 
 
@@ -161,7 +167,7 @@ class SearchResults extends Component {
                 center: [this.props.location[0], this.props.location[1]],
                 zoom: 11
             });
-        } else {
+        } else if (this.state.currentCoordinates != []) {
             map = new mapboxgl.Map({
                 container: this.mapContainer,
                 style: 'mapbox://styles/mapbox/streets-v11',
@@ -188,7 +194,6 @@ class SearchResults extends Component {
                 }
 
                 this.setState({
-                    map: true,
                     currentCoordinates: coordinates
                 })
 
@@ -218,7 +223,6 @@ class SearchResults extends Component {
                 }
 
                 this.setState({
-                    map: true,
                     currentCoordinates: coordinates
                 })
 
