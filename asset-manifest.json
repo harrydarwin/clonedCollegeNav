@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/clonedCollegeNav/static/css/main.5a1a77a0.chunk.css",
-    "main.js": "/clonedCollegeNav/static/js/main.c550cc13.chunk.js",
-    "main.js.map": "/clonedCollegeNav/static/js/main.c550cc13.chunk.js.map",
-    "runtime-main.js": "/clonedCollegeNav/static/js/runtime-main.22f8974c.js",
-    "runtime-main.js.map": "/clonedCollegeNav/static/js/runtime-main.22f8974c.js.map",
+    "main.css": "/clonedCollegeNav/static/css/main.e4298806.chunk.css",
+    "main.js": "/clonedCollegeNav/static/js/main.58097331.chunk.js",
+    "main.js.map": "/clonedCollegeNav/static/js/main.58097331.chunk.js.map",
+    "runtime-main.js": "/clonedCollegeNav/static/js/runtime-main.73315c90.js",
+    "runtime-main.js.map": "/clonedCollegeNav/static/js/runtime-main.73315c90.js.map",
     "static/css/2.3133dcae.chunk.css": "/clonedCollegeNav/static/css/2.3133dcae.chunk.css",
-    "static/js/2.a36348cf.chunk.js": "/clonedCollegeNav/static/js/2.a36348cf.chunk.js",
-    "static/js/2.a36348cf.chunk.js.map": "/clonedCollegeNav/static/js/2.a36348cf.chunk.js.map",
-    "static/js/3.a8e71f31.chunk.js": "/clonedCollegeNav/static/js/3.a8e71f31.chunk.js",
-    "static/js/3.a8e71f31.chunk.js.map": "/clonedCollegeNav/static/js/3.a8e71f31.chunk.js.map",
+    "static/js/2.3871b6e5.chunk.js": "/clonedCollegeNav/static/js/2.3871b6e5.chunk.js",
+    "static/js/2.3871b6e5.chunk.js.map": "/clonedCollegeNav/static/js/2.3871b6e5.chunk.js.map",
+    "static/js/3.bf193cf0.chunk.js": "/clonedCollegeNav/static/js/3.bf193cf0.chunk.js",
+    "static/js/3.bf193cf0.chunk.js.map": "/clonedCollegeNav/static/js/3.bf193cf0.chunk.js.map",
     "index.html": "/clonedCollegeNav/index.html",
     "static/css/2.3133dcae.chunk.css.map": "/clonedCollegeNav/static/css/2.3133dcae.chunk.css.map",
-    "static/css/main.5a1a77a0.chunk.css.map": "/clonedCollegeNav/static/css/main.5a1a77a0.chunk.css.map",
-    "static/js/2.a36348cf.chunk.js.LICENSE.txt": "/clonedCollegeNav/static/js/2.a36348cf.chunk.js.LICENSE.txt",
+    "static/css/main.e4298806.chunk.css.map": "/clonedCollegeNav/static/css/main.e4298806.chunk.css.map",
+    "static/js/2.3871b6e5.chunk.js.LICENSE.txt": "/clonedCollegeNav/static/js/2.3871b6e5.chunk.js.LICENSE.txt",
     "static/js/mapbox-gl-csp-worker.f1fcd034.worker.js": "/clonedCollegeNav/static/js/mapbox-gl-csp-worker.f1fcd034.worker.js",
     "static/js/mapbox-gl-csp-worker.f1fcd034.worker.js.map": "/clonedCollegeNav/static/js/mapbox-gl-csp-worker.f1fcd034.worker.js.map",
     "static/media/App.css": "/clonedCollegeNav/static/media/pexels-johannes-plenio-1103970.b9a92a4f.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.22f8974c.js",
+    "static/js/runtime-main.73315c90.js",
     "static/css/2.3133dcae.chunk.css",
-    "static/js/2.a36348cf.chunk.js",
-    "static/css/main.5a1a77a0.chunk.css",
-    "static/js/main.c550cc13.chunk.js"
+    "static/js/2.3871b6e5.chunk.js",
+    "static/css/main.e4298806.chunk.css",
+    "static/js/main.58097331.chunk.js"
   ]
 }
