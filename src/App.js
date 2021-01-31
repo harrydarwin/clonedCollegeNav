@@ -17,8 +17,11 @@ import Footer from './Footer.js';
 let city = "";
 let country = "";
 let mapSearches = [];
-
+let searchResults = [];
 mapboxgl.accessToken = `pk.eyJ1IjoiaGFycnlndWxvaWVuIiwiYSI6ImNrazQ2bmFuYTE2c2MydnBiZW5mcDVnaHYifQ.QPjai4qdHOKRY8qHYt1QVw`;
+const universityID = '4bf58dd8d48988d1ae941735';
+const collegeID = '4bf58dd8d48988d1a2941735';
+const tradeSchoolID = '4bf58dd8d48988d1ad941735';
 
 class App extends Component {
   constructor() {
@@ -55,15 +58,17 @@ class App extends Component {
 
  getData = () => {
   //Grab data from API
-   this.apiCall();
-  //Grab data from firebase
+   this.apiCall(universityID);
+   this.apiCall(collegeID);
+   this.apiCall(tradeSchoolID);
+   //Grab data from firebase
    this.fireBaseCall();
-  //  scrolls to search results when API call is made
-  this.scrollTo();
-  
-  // testArray.forEach(school => this.mapData(school));
-  this.mapData(`${this.state.cityInput} ${this.state.countryInput}`)
+   //  scrolls to search results when API call is made
+   this.scrollTo();
    
+   // testArray.forEach(school => this.mapData(school));
+   this.mapData(`${this.state.cityInput} ${this.state.countryInput}`)  
+    
  }
 
  handleSubmit = (e) => {
@@ -157,7 +162,7 @@ class App extends Component {
         const possibleLocations = res.data.features;
 
         const ourLocation = possibleLocations[0].geometry.coordinates;
-        
+        console.log(ourLocation)
         this.setState({
           locationCoordinates: ourLocation
         })
@@ -211,7 +216,7 @@ class App extends Component {
   }
 
   // API call function which draws data from the API and handles errors if data is not found 
-  apiCall() {
+  apiCall(schoolType) {
     // longLats = [];
     axios({
       method: 'GET',
@@ -221,7 +226,7 @@ class App extends Component {
         client_id: 'SMUUEFGVRENHIW3EQX5ICCFCTNQPPIWVXP21E2BQVRH421OF',
         client_secret: 'EVNPHQ3EYKNQKZMOAKRVUTT0KDHXXGNUWUCY0LFZTVRE2BAF',
         near: this.state.cityInput + " " + this.state.countryInput,
-        categoryId: this.state.schoolTypeId,
+        categoryId: schoolType,
         radius: this.state.radius,
         v: 20201205
       }
@@ -236,11 +241,12 @@ class App extends Component {
       //   filteredArray.forEach(school => {
       //     longLats.push(school)
       //   })
-      console.log(filteredArray)
-        this.setState({
-          schoolResults: filteredArray,
-          isActive: true
-        });
+      filteredArray.forEach(result => searchResults.push(result));
+      this.setState({
+        schoolResults: searchResults,
+        isActive: true
+      });
+        
         // console.log(filteredArray, longLats)
       // }
 
