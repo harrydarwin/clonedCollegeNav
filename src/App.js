@@ -58,9 +58,7 @@ class App extends Component {
 
  getData = () => {
   //Grab data from API
-   this.apiCall(universityID);
-   this.apiCall(collegeID);
-   this.apiCall(tradeSchoolID);
+  this.categoriesToSearch(universityID, collegeID, tradeSchoolID);
    //Grab data from firebase
    this.fireBaseCall();
    //  scrolls to search results when API call is made
@@ -103,6 +101,7 @@ class App extends Component {
    })
  }
 
+
   fireBaseCall() {
     const dbRef = firebase.database().ref();
     dbRef.on('value', (data) => {
@@ -112,18 +111,19 @@ class App extends Component {
       // create and store usable, formatted firebase data 
       let newSchoolArray = formatFirebaseData(newSchoolObject);
       // convert and store API school type id (long alphanumeric string) to english school type for usable comparison
-      let userSchoolType = this.convertCategoryIdToName();
+      // let userSchoolType = this.convertCategoryIdToName();
 
       // filter firebase formatted school data by comparing school type with usr chosen school type and return results in an array
-      const filteredNewSchoolArray = this.compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType);
+      // const filteredNewSchoolArray = this.compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType);
       mapSearches = [];
-      filteredNewSchoolArray.forEach(school => {
+      //was filteredNewSchoolArray
+      newSchoolArray.forEach(school => {
         this.userSchoolMapData(school);
       })
       
       //store results in state
       this.setState({
-        newSchool: filteredNewSchoolArray
+        newSchool: newSchoolArray
       });
     });
     // store in variables to pass as props
@@ -131,16 +131,20 @@ class App extends Component {
     country = this.state.countryInput;
   }
 
+//takes firebase schools objects, formats addresses + find and formats coordinates, then pushes to array mapSearches. 
   userSchoolMapData(query) {
     let eachSchool = query;
     eachSchool.address = query.schoolAddress.join();
 
     this.geoCodeCall(eachSchool.address)
       .then((res) => {
-        eachSchool.coordinates =  res.data.features[0].center;
-        mapSearches.push(eachSchool);
+        //check for address (just error handling because firebase has a blank placeholder object)
+        if(res.data.features.length > 0){
+          //take first address in search results array and push to mapSearches array to be displayed
+          eachSchool.coordinates =  res.data.features[0].center;
+          mapSearches.push(eachSchool);
+        }
       }).catch((err) => {
-        
         this.setState({
           isActive: false,
         });
@@ -155,7 +159,7 @@ class App extends Component {
 
   }
 
-  // Grab coordinates of current location
+  // Grab coordinates of current location (with geocodecall) and stores cooordinates in state to build initial map
   mapData(query) {
     this.geoCodeCall(query)
       .then((res) => {
@@ -177,7 +181,7 @@ class App extends Component {
       });;
   }
 
-
+//translates addresses to long and lat coordinates
   geoCodeCall(query) {
     return axios({
       method: 'GET',
@@ -190,7 +194,7 @@ class App extends Component {
   }
 
 
-
+  //filters through array of schools comparing the category to the user-chosen type/category + location input 
   compareUserInputAndCreateResultsArray(newSchoolArray, userSchoolType) {
     return newSchoolArray.filter((object => {
 
@@ -203,6 +207,7 @@ class App extends Component {
     );
   }
 
+  //takes user type choice (# ID) and converts to string word
   convertCategoryIdToName() {
     let userSchoolType = '';
     if (this.state.schoolTypeId === '4bf58dd8d48988d1ae941735') {
@@ -285,7 +290,11 @@ class App extends Component {
     });
   }
 
-
+  categoriesToSearch(...queries) {
+    queries.forEach(query => {
+      this.apiCall(query);
+    })
+  }
 
 
   render() {

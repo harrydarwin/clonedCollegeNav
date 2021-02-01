@@ -274,6 +274,8 @@ class SearchResults extends Component {
                     <div className="allResults">
                             <h2 className="searchLocation" name="scroll-to-element" ref={this.sectionRef}><span>{this.props.userCityInput}, {this.props.userCountryInput}</span></h2>
                         <div className="resultsScrollBox">
+                            {
+                                this.props.schoolsAdded ?
                         <div className="addedSchool">
                             <h2>User Added</h2>
                             {
@@ -292,7 +294,8 @@ class SearchResults extends Component {
                                     )
                                 })
                             }
-                        </div>
+                        </div> : null
+                            }
                         {
                             this.props.schoolResults ?
                             <div className="searchedSchools">
