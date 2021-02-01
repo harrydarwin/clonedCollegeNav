@@ -87,6 +87,7 @@ class SearchResults extends Component {
                     markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
                     markerDiv.style.cursor="pointer";
                     markerDiv.addEventListener('click', (e) => {
+                        console.log(e);
                         coordinates = [];
                         for(let coord in marker._lngLat){
                             coordinates.push(marker._lngLat[coord]);
@@ -99,7 +100,8 @@ class SearchResults extends Component {
                         
                       
                         map.flyTo({
-                            center: this.state.currentCoordinates
+                            center: this.state.currentCoordinates,
+                            zoom: 14
                         })
                         // console.log(e, marker._lngLat)
                     })
@@ -107,7 +109,7 @@ class SearchResults extends Component {
 
                 })
             }
-            console.log("if statement")
+           
             this.props.schoolsAdded.forEach(point => {
                 let marker = new mapboxgl.Marker()
                     .setLngLat([point.coordinates[0], point.coordinates[1]])
@@ -119,10 +121,12 @@ class SearchResults extends Component {
                 markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
                 markerDiv.style.cursor = "pointer";
                 markerDiv.addEventListener('click', (e) => {
+                    coordinates = [];
+                    
                     for (let coord in marker._lngLat) {
                         coordinates.push(marker._lngLat[coord]);
                     }
-
+                    
                     this.setState({
                         map: true,
                         currentCoordinates: coordinates
@@ -130,9 +134,9 @@ class SearchResults extends Component {
 
 
                     map.flyTo({
-                        center: this.state.currentCoordinates
+                        center: this.state.currentCoordinates,
+                        zoom: 14
                     })
-                    // console.log(e, marker._lngLat)
                 })
             })
     
