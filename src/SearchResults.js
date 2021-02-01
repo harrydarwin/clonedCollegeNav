@@ -36,13 +36,13 @@ class SearchResults extends Component {
 
 
     componentDidMount() {
-        let coordinates = [];
-
+        let coordinates = [this.props.location[0], this.props.location[1]];
+        console.log(coordinates);
         this.sectionRef.current.scrollIntoView();
         let map = new mapboxgl.Map({
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v11',
-            center: [this.props.location[0], this.props.location[1]],
+            center: coordinates,
             zoom: 11
         });
         // let tradeLayer = [];
@@ -87,6 +87,7 @@ class SearchResults extends Component {
                     markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
                     markerDiv.style.cursor="pointer";
                     markerDiv.addEventListener('click', (e) => {
+                        coordinates = [];
                         for(let coord in marker._lngLat){
                             coordinates.push(marker._lngLat[coord]);
                         }
@@ -150,87 +151,87 @@ class SearchResults extends Component {
 
     }
     
-    componentDidUpdate() {
-        let map;
-        let coordinates = [];
-        if(this.state.map === false) {
+    // componentDidUpdate() {
+    //     let map;
+    //     let coordinates = [];
+    //     if(this.state.map === false) {
 
-            map = new mapboxgl.Map({
-                container: this.mapContainer,
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: [this.props.location[0], this.props.location[1]],
-                zoom: 11
-            });
-        } else {
-            map = new mapboxgl.Map({
-                container: this.mapContainer,
-                style: 'mapbox://styles/mapbox/streets-v11',
-                center: this.state.currentCoordinates,
-                zoom: 11
-            });
-        }
+    //         map = new mapboxgl.Map({
+    //             container: this.mapContainer,
+    //             style: 'mapbox://styles/mapbox/streets-v11',
+    //             center: [this.props.location[0], this.props.location[1]],
+    //             zoom: 11
+    //         });
+    //     } else {
+    //         map = new mapboxgl.Map({
+    //             container: this.mapContainer,
+    //             style: 'mapbox://styles/mapbox/streets-v11',
+    //             center: this.state.currentCoordinates,
+    //             zoom: 11
+    //         });
+    //     }
 
-        if (this.props.schoolResults) {
-        this.props.schoolResults.forEach(point => {
-            let marker = new mapboxgl.Marker({
-                color: point.markerColor
-            })  .setLngLat([point.location.lng, point.location.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
-                .addTo(map);
+    //     if (this.props.schoolResults) {
+    //     this.props.schoolResults.forEach(point => {
+    //         let marker = new mapboxgl.Marker({
+    //             color: point.markerColor
+    //         })  .setLngLat([point.location.lng, point.location.lat])
+    //             .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.name}</h4><p>${point.location.formattedAddress}</p>`))
+    //             .addTo(map);
 
-            const markerDiv = marker.getElement();
-            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
-            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-            markerDiv.style.cursor = "pointer";
-            markerDiv.addEventListener('click', (e) => {
-                for (let coord in marker._lngLat) {
-                    coordinates.push(marker._lngLat[coord]);
-                }
+    //         const markerDiv = marker.getElement();
+    //         markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+    //         markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+    //         markerDiv.style.cursor = "pointer";
+    //         markerDiv.addEventListener('click', (e) => {
+    //             for (let coord in marker._lngLat) {
+    //                 coordinates.push(marker._lngLat[coord]);
+    //             }
 
-                this.setState({
-                    map: true,
-                    currentCoordinates: coordinates
-                })
+    //             this.setState({
+    //                 map: true,
+    //                 currentCoordinates: coordinates
+    //             })
 
 
-                map.flyTo({
-                    center: this.state.currentCoordinates
-                })
-                // console.log(e, marker._lngLat)
-            })
+    //             map.flyTo({
+    //                 center: this.state.currentCoordinates
+    //             })
+    //             // console.log(e, marker._lngLat)
+    //         })
            
 
-        })
-    }
-        this.props.schoolsAdded.forEach(point => {
-            let marker = new mapboxgl.Marker()
-                .setLngLat([point.coordinates[0], point.coordinates[1]])
-                .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>`))
-                .addTo(map);
+    //     })
+    // }
+    //     this.props.schoolsAdded.forEach(point => {
+    //         let marker = new mapboxgl.Marker()
+    //             .setLngLat([point.coordinates[0], point.coordinates[1]])
+    //             .setPopup(new mapboxgl.Popup().setHTML(`<h4>${point.schoolName}</h4><p>${point.schoolAddress}</p>`))
+    //             .addTo(map);
 
-            const markerDiv = marker.getElement();
-            markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
-            markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
-            markerDiv.style.cursor = "pointer";
-            markerDiv.addEventListener('click', (e) => {
-                for (let coord in marker._lngLat) {
-                    coordinates.push(marker._lngLat[coord]);
-                }
+    //         const markerDiv = marker.getElement();
+    //         markerDiv.addEventListener('mouseenter', () => marker.togglePopup());
+    //         markerDiv.addEventListener('mouseleave', () => marker.togglePopup());
+    //         markerDiv.style.cursor = "pointer";
+    //         markerDiv.addEventListener('click', (e) => {
+    //             for (let coord in marker._lngLat) {
+    //                 coordinates.push(marker._lngLat[coord]);
+    //             }
 
-                this.setState({
-                    map: true,
-                    currentCoordinates: coordinates
-                })
+    //             this.setState({
+    //                 map: true,
+    //                 currentCoordinates: coordinates
+    //             })
 
 
-                map.flyTo({
-                    center: this.state.currentCoordinates
-                })
-                // console.log(e, marker._lngLat)
-            })
-        })
+    //             map.flyTo({
+    //                 center: this.state.currentCoordinates
+    //             })
+    //             // console.log(e, marker._lngLat)
+    //         })
+    //     })
 
-    }
+    // }
     
 
 
