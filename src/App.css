@@ -473,7 +473,36 @@ summary:focus {
   max-width: 200px;
 }
 
+.filter {
+  list-style: none;
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  /* background: blue; */
+  max-width: 500px;
+  top: 5px;
+  color: #416bff;
+}
 
+.filter ul {
+  display: flex;
+}
+
+.filter li {
+  margin-right: 30px;
+  background: #b1bc2b;;
+  padding: 3px;
+  border: 2px solid #b1bc2b;
+}
+
+.filter li:focus,
+.filter li:hover {
+  cursor: pointer;
+}
+
+.visible {
+  display: none;
+}
 
 
 .favoritesFlex {

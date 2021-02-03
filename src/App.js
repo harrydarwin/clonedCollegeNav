@@ -18,6 +18,7 @@ let city = "";
 let country = "";
 let mapSearches = [];
 let searchResults = [];
+let filterOptions = [];
 mapboxgl.accessToken = `pk.eyJ1IjoiaGFycnlndWxvaWVuIiwiYSI6ImNrazQ2bmFuYTE2c2MydnBiZW5mcDVnaHYifQ.QPjai4qdHOKRY8qHYt1QVw`;
 const universityID = '4bf58dd8d48988d1ae941735';
 const collegeID = '4bf58dd8d48988d1a2941735';
@@ -42,6 +43,7 @@ class App extends Component {
       mapLocations: [],
       longLatLocations: [],
       locationCoordinates: [],
+      filters: []
     }
   }
 
@@ -71,17 +73,26 @@ class App extends Component {
 
  handleSubmit = (e) => {
    e.preventDefault();
+   city = '';
+   country = '';
+   mapSearches = [];
+   searchResults = [];
+   filterOptions = [];
+    this.setState({
+      schoolResults: [],
+      newSchool: []
+    })
    this.getData();
    this.setState({
      directMeHome: true
    })
  }
 
- handleSchoolType = (e) => {
-   this.setState({
-     schoolTypeId: e.target.value
-   })
- }
+//  handleSchoolType = (e) => {
+//    this.setState({
+//      schoolTypeId: e.target.value
+//    })
+//  }
 
  handleRadius = (e) => {
    this.setState({
@@ -142,6 +153,7 @@ class App extends Component {
         if(res.data.features.length > 0){
           //take first address in search results array and push to mapSearches array to be displayed
           eachSchool.coordinates =  res.data.features[0].center;
+         
           mapSearches.push(eachSchool);
         }
       }).catch((err) => {
@@ -166,7 +178,7 @@ class App extends Component {
         const possibleLocations = res.data.features;
 
         const ourLocation = possibleLocations[0].geometry.coordinates;
-        console.log(ourLocation)
+       
         this.setState({
           locationCoordinates: ourLocation
         })
@@ -241,15 +253,21 @@ class App extends Component {
       const filteredArray = ourCategoryFilter(dataArray);
 
       //assign a markerColor to each school object based on its type
-      colorPicker(filteredArray);
+      colorTypePicker(filteredArray);
       // if(filteredArray) {
       //   filteredArray.forEach(school => {
       //     longLats.push(school)
       //   })
+      filteredArray.forEach(school => {
+        if(!filterOptions.includes(school.type)) {
+          filterOptions.push(school.type)
+        }
+      })
       filteredArray.forEach(result => searchResults.push(result));
       this.setState({
         schoolResults: searchResults,
-        isActive: true
+        isActive: true,
+        filters: filterOptions
       });
         
         // console.log(filteredArray, longLats)
@@ -302,7 +320,7 @@ class App extends Component {
       <Router>
         
         <Header
-        schoolHandler={this.handleSchoolType}
+        // schoolHandler={this.handleSchoolType}
         radiusHandler={this.handleRadius}
         handleCityInput={this.handleCityInput}
         handleCountryInput={this.handleCountryInput}
@@ -320,6 +338,7 @@ class App extends Component {
               userCountryInput = {country}
               location = {this.state.locationCoordinates}
               // mapPoints = {longLats}
+              filters = {this.state.filters}
               schoolsAdded = {mapSearches}
               />
             </>
@@ -364,13 +383,13 @@ function ourCategoryFilter(dataArray) {
   );
 }
 
-function colorPicker(array) {
+function colorTypePicker(array) {
 
   array.forEach(object => {
-    console.log(object.categories[0].name)
-    if (object.name.includes("University")) { object.markerColor = "#7261a3" }
-    else if (object.categories[0].name == "Community College") { object.markerColor = "#5ca4a9" }
-    else if (object.categories[0].name == "Trade School") { object.markerColor = "#e6af2e" }
-    else { object.markerColor = "#EDD2E0" }
+  
+    if (object.name.includes("University")) { object.markerColor = "#7261a3"; object.type = "University" }
+    else if (object.categories[0].name == "Community College") { object.markerColor = "#5ca4a9"; object.type = "College" }
+    else if (object.categories[0].name == "Trade School") { object.markerColor = "#e6af2e"; object.type = "Trade School" }
+    else { object.markerColor = "#EDD2E0"; object.type = "" }
   })
 }

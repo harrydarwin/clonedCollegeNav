@@ -16,7 +16,7 @@ class Header extends Component{
     }
 
     componentDidMount() {
-
+        //grabs favourites schools from firebase to calculate # for display
         const dbRef = firebase.database().ref();
 
         dbRef.on('value', (data) => {
@@ -85,9 +85,9 @@ class Header extends Component{
                         </div>
                     </div>
                     
-                    <div className="schoolTypeInputs">
+                    {/* <div className="schoolTypeInputs">
                         <legend>School Type</legend>
-                        <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' required/>
+                        <input onChange={schoolHandler} type="radio" id='university' name='schoolType' value='4bf58dd8d48988d1ae941735' />
                         <label htmlFor="university">University</label>
                         <input onChange={schoolHandler} type="radio" id='college' name='schoolType' value='4bf58dd8d48988d1a2941735' />
                         <label htmlFor="college">College</label>
@@ -95,7 +95,7 @@ class Header extends Component{
                             <input onChange={schoolHandler} type="radio" id='tradeSchool' name='schoolType' value='4bf58dd8d48988d1ad941735' />
                             <label htmlFor="tradeSchool">Trade School</label>
                         </div>
-                    </div>
+                    </div> */}
                     {this.renderRedirect()}
                     <button onClick={this.setRedirect}>Find Schools!</button>
                     </div>
