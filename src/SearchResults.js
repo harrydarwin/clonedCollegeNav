@@ -85,18 +85,17 @@ class SearchResults extends Component {
             let resultsArray = [...listedSearchResults];
 
             filterButtons.addEventListener('click', function (event) {
-                
+               
+                event.target.classList.toggle('selectedFilter');
                 resultsArray.forEach(result => {
-                    
                     if (result.getAttribute('data-type') === event.target.textContent) {
-                        
                         result.classList.toggle('visible')
                     }
                 })
             })
             
             if(this.props.schoolResults) {
-                //for each set of coordinates do this and pass coodrinates to setlnglat
+                //for each set of coordinates do this and pass coordinates to setlnglat
                 this.props.schoolResults.forEach(point => {
                     
                     const marker = new mapboxgl.Marker({

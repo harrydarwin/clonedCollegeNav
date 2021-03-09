@@ -504,6 +504,9 @@ summary:focus {
   display: none;
 }
 
+.selectedFilter {
+  color: RGBA(65,107,255,.5)
+}
 
 .favoritesFlex {
   display: flex;

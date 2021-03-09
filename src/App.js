@@ -59,16 +59,16 @@ class App extends Component {
   
 
  getData = () => {
-  //Grab data from API
-  this.categoriesToSearch(universityID, collegeID, tradeSchoolID);
-   //Grab data from firebase
-   this.fireBaseCall();
-   //  scrolls to search results when API call is made
-   this.scrollTo();
-   
    // testArray.forEach(school => this.mapData(school));
    this.mapData(`${this.state.cityInput} ${this.state.countryInput}`)  
-    
+  //Grab data from API
+  setTimeout(() => {
+    this.categoriesToSearch(universityID, collegeID, tradeSchoolID);
+     //Grab data from firebase
+     this.fireBaseCall();
+     //  scrolls to search results when API call is made
+     this.scrollTo();
+  }, 2) 
  }
 
  handleSubmit = (e) => {
@@ -182,6 +182,7 @@ class App extends Component {
         this.setState({
           locationCoordinates: ourLocation
         })
+        console.log(this.state.locationCoordinates)
       }).catch((err) => {
         
         Swal.fire({
