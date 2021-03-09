@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/clonedCollegeNav/static/css/main.1dedf844.chunk.css",
-    "main.js": "/clonedCollegeNav/static/js/main.a2da1799.chunk.js",
-    "main.js.map": "/clonedCollegeNav/static/js/main.a2da1799.chunk.js.map",
+    "main.css": "/clonedCollegeNav/static/css/main.da3dbb8f.chunk.css",
+    "main.js": "/clonedCollegeNav/static/js/main.aa15f50c.chunk.js",
+    "main.js.map": "/clonedCollegeNav/static/js/main.aa15f50c.chunk.js.map",
     "runtime-main.js": "/clonedCollegeNav/static/js/runtime-main.73315c90.js",
     "runtime-main.js.map": "/clonedCollegeNav/static/js/runtime-main.73315c90.js.map",
     "static/css/2.3133dcae.chunk.css": "/clonedCollegeNav/static/css/2.3133dcae.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.bf193cf0.chunk.js.map": "/clonedCollegeNav/static/js/3.bf193cf0.chunk.js.map",
     "index.html": "/clonedCollegeNav/index.html",
     "static/css/2.3133dcae.chunk.css.map": "/clonedCollegeNav/static/css/2.3133dcae.chunk.css.map",
-    "static/css/main.1dedf844.chunk.css.map": "/clonedCollegeNav/static/css/main.1dedf844.chunk.css.map",
+    "static/css/main.da3dbb8f.chunk.css.map": "/clonedCollegeNav/static/css/main.da3dbb8f.chunk.css.map",
     "static/js/2.73b77acd.chunk.js.LICENSE.txt": "/clonedCollegeNav/static/js/2.73b77acd.chunk.js.LICENSE.txt",
     "static/js/mapbox-gl-csp-worker.f1fcd034.worker.js": "/clonedCollegeNav/static/js/mapbox-gl-csp-worker.f1fcd034.worker.js",
     "static/js/mapbox-gl-csp-worker.f1fcd034.worker.js.map": "/clonedCollegeNav/static/js/mapbox-gl-csp-worker.f1fcd034.worker.js.map",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.73315c90.js",
     "static/css/2.3133dcae.chunk.css",
     "static/js/2.73b77acd.chunk.js",
-    "static/css/main.1dedf844.chunk.css",
-    "static/js/main.a2da1799.chunk.js"
+    "static/css/main.da3dbb8f.chunk.css",
+    "static/js/main.aa15f50c.chunk.js"
   ]
 }
